@@ -1,2 +1,6 @@
-## test
-Hello World
+---
+layout: page
+title: InIT.biz Docs
+---
+
+## Cumulus Core
