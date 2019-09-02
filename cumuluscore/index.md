@@ -87,7 +87,6 @@ Cumulus is using features to separate functionality and access for users. Every 
 
 The syntax is similar to registering backend permissions. For example:
 
-```php
     public function registerCumulusFeatures()
     {
         return [
@@ -97,7 +96,6 @@ The syntax is similar to registering backend permissions. For example:
            ]
         ];
     }
-```
 
 Features are assigned to plans. So that every cluster that has a particular plan has the same set of features. It is a good idea to have them as many as possible to make the application customizable.
 
