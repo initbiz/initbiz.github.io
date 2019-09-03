@@ -1,4 +1,5 @@
 # Cumulus Core - create a SaaS (multi-tenant) application in OctoberCMS
+![Cumulus banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/cumuluscore/assets/images/cumulus-banner.png)
 
 ## Introduction
 
