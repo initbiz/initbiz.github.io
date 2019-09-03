@@ -7,10 +7,11 @@ footer h1 {
     text-align: right;
 }
 
-.js-toc ol {
+ol.toc-list {
     position: fixed;
+    list-style: none;
 }
 
-ol.toc-list {
-    list-style: none;
+.page-content img {
+    max-width: 100%;
 }
