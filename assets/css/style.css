@@ -7,6 +7,10 @@ footer h1 {
     text-align: right;
 }
 
-.js-toc {
+.js-toc ol {
     position: fixed;
+}
+
+ol.toc-list {
+    list-style: none;
 }
