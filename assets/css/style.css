@@ -22,3 +22,9 @@ ol.toc-list {
 .page-content img {
     max-width: 100%;
 }
+
+.js-toc-content h2, .js-toc-content h3 {
+    position: absolute;
+    left: 0px;
+    top: -60px;
+}
