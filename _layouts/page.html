@@ -2,7 +2,7 @@
 layout: default
 ---
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10 js-toc-content">
         {{ content }}
     </div>
     <div id="toc" class="col-md-2 js-toc">
@@ -10,3 +10,14 @@ layout: default
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        tocSelector: '.js-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.js-toc-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+</script>
