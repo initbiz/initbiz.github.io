@@ -11,8 +11,11 @@ footer h1 {
     text-align: right;
 }
 
-ol.toc-list {
+#toc {
     position: fixed;
+}
+
+ol.toc-list {
     list-style: none;
 }
 
