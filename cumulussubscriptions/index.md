@@ -1,5 +1,5 @@
 # Cumulus Subscriptions - Add subscriptions to plans in your Cumulus based app
-![Cumulus Subscriptions banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/cumulusplus/assets/images/cumulus-plus-banner.png)
+![Cumulus Subscriptions banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/cumulussubscriptions/assets/images/cumulus-subscriptions-banner.png)
 
 ## Introduction
 

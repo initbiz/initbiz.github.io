@@ -5,8 +5,8 @@ layout: default
     <div class="col-md-10 js-toc-content">
         {{ content }}
     </div>
-    <div id="toc" class="col-md-2">
-        <div class="js-toc">
+    <div class="col-md-2">
+        <div id="toc" class="js-toc">
         </div>
     </div>
 </div>
@@ -15,9 +15,7 @@ layout: default
 <script>
     tocbot.init({
         tocSelector: '.js-toc',
-        // Where to grab the headings to build the table of contents.
         contentSelector: '.js-toc-content',
-        // Which headings to grab inside of the contentSelector element.
         headingSelector: 'h2, h3',
         collapseDepth: 1,
     });
