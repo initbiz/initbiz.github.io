@@ -24,7 +24,7 @@ ol.toc-list {
 }
 
 .js-toc-content h2, .js-toc-content h3 {
-    position: absolute;
+    position: relative;
     left: 0px;
-    top: -60px;
+    top: -80px;
 }
