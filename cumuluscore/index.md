@@ -1,6 +1,6 @@
 # Cumulus Core - create a SaaS (multi-tenant) application in OctoberCMS
 
-[//]: # (Introduction)
+## Introduction
 
 The plugin is a skeleton for building Software as a Service (SaaS, multi-tenant) applications using OctoberCMS. SaaS is (according to Wikipedia) a software licensing and delivery model in which software is licensed on a subscription basis and is centrally hosted.
 
