@@ -2,7 +2,8 @@
 ![InIT DRY banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/initdry/assets/images/initdry-banner.png)
 
 ## Introduction
-Plugin with set of classes and helpers to be used in third party plugins.
+
+Plugin with a set of classes and helpers to be used in third-party plugins.
 
 The more plugins we develop the more copy-pasta is out there. This plugin is an end to those practices.
 
@@ -11,20 +12,20 @@ Go ahead and contribute.
 [//]: # (Documentation)
 
 ## `PluginRegistrationManager`
-The `PluginRegistrationManager` was created to run and merge output of any register methods from `Plugin.php` in your system. Using the manager you can define your own register*something* method which returns array of merged arrays.
+
+The `PluginRegistrationManager` was created to run and merge the output of any register methods from `Plugin.php` in your system. Using the manager you can define your own register*something* method which returns an array of merged arrays.
 
 The manager is `Singleton` so the example usage would be as follows:
 
-```php
+
     $pluginRegistrationManager = PluginRegistrationManager::instance();
     $registeredDefinitions = $pluginRegistrationManager->runMethod('registerMyPluginDefinitions');
-```
+
 
 ## `Helpers`
 
 Class with commonly used functions that do not belong to any other helpers.
 
-```
     getUser() : mixed
         Get currently logged in user and timestamp 'last seen'
         Returns:
@@ -42,15 +43,14 @@ Class with commonly used functions that do not belong to any other helpers.
             \Cms\Classes\Theme 	$theme theme object
         Returns:
             string — url
-```
+
 
 ## `StringHelpers`
 
 Class with string helpers.
 
-```
     random_str(integer  $length, string  $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') : string
-        Method by Scott Arciszewski: https://stackoverflow.com/a/31107425
+        A method by Scott Arciszewski: https://stackoverflow.com/a/31107425
         Generate a random string, using a cryptographically secure
         pseudorandom number generator (random_int)
         Parameters:
@@ -60,7 +60,7 @@ Class with string helpers.
             string
 
     ucwords(string  $string, array  $delimiters = array(' ', '-', '\'', '"', ".")) : string
-        Upper case every word after delimiter
+        Upper case every word after the delimiter
         Parameters:
             string 	$string     string to upper case after all delimiters
             array 	$delimiters array of delimiters to uppercase after
@@ -74,5 +74,3 @@ Class with string helpers.
             string 	$encoding encoding
         Returns:
             string — First letter uppercased string
-
-```
