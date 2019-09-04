@@ -20,12 +20,12 @@ You can install the plugin using any of the following methods:
 The plugin will automatically install [maxhelias/php-nominatim](https://github.com/maxhelias/php-nominatim), which is used to query [Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) service. If you are going to use the Nominatim service, recall the [Nominatim usage policy](https://operations.osmfoundation.org/policies/nominatim/).
 
 ## Embed the map
-You can embed a map using Leaflet map component.
+You can embed a map using the Leaflet map component.
 
 ![Leaflet map component](https://raw.githubusercontent.com/initbiz/initbiz.github.io/leafletpro/assets/images/leafletmap_component.png)
 
 As you see in the above screenshot you can specify a few parameters:
-* Longitude and latitude of the center of the map being shown
+* Longitude and latitude of the center of the map that is shown
 * Initial zoom of the map
 * Scroll protection to start zooming with scroll only after clicking the map
 * Leaflet plugins - checkboxes for enabling Leaflet plugins for the component
@@ -34,21 +34,21 @@ As you see in the above screenshot you can specify a few parameters:
 
 ![Custom marker popup with InIT.biz logo](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/leaflerpro/assets/images/marker_with_initbiz_popup.png)
 
-The popup content is defined individually for every marker. By default it's seeded with the content of `plugins/initbiz/leafletpro/models/marker/_default_popup_content.htm`.
+The popup content is defined individually for every marker. By default, it's seeded with the content of `plugins/initbiz/leafletpro/models/marker/_default_popup_content.htm`.
 
-The partial can be easily overridden by creating `_default_popup_content.htm` file in your theme in `partials` directory. Remember that overriding the partial will not change current marker popups. This partial is used only as a seeder when popup content is empty while saving marker.
+The partial can be easily overridden by creating the `_default_popup_content.htm` file in your theme in the `partials` directory. Remember that overriding the partial will not change current marker popups. This partial is used only as a seeder when popup content is empty while saving marker.
 
 ## Cumulus integration
 The plugin is nicely integrated with the [Initbiz.CumulusCore](https://octobercms.com/plugin/initbiz-cumuluscore) plugin.
 
-1. When cluster is created or updated (address changed), a marker is created or updated
-1. When cluster is selected in create marker view address is refreshed from cluster's address
+1. When the cluster is created or updated (address changed), a marker is created or updated
+1. When the cluster is selected in create marker view address is refreshed from cluster's address
 
 ## TODO / Future plans
 * Marker categories to filter markers on maps
 * Single marker map
-* Backend form widget for current lon / lat preview and for setting lon / lat using map marker
-* Easy configurable marker icons for markers and categories from backend
+* Backend form widget for current lon / lat preview and for setting lon / lat using the map marker
+* Easily configurable marker icons for markers and categories from the backend
 * Add possibility to manage more than one marker by Cumulus clusters
 * Pop up in backend with other possibilities for the same address (right now getting only the first element)
 * Support Leaflet plugins
