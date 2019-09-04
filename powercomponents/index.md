@@ -3,43 +3,49 @@
 
 ## Introduction
 
-PowerComponents plugin is a OctoberCMS plugin with set of traits and classes for components that moves working with components to a next level.
+PowerComponents plugin is an OctoberCMS plugin with a set of traits and classes for components that moves working with components to the next level.
 
 **See the video** presenting quick start of writing components using Power Components: https://www.youtube.com/watch?v=ZTRdmudGXD0
 
-### Disclaimer
-**The plugin is under heavy development and it is beta version so it should not be used in production. It still may crash and behave unexpectedly.** 
+## Disclaimer
+**The plugin is under heavy development and it is a beta version so it should not be used in production. It still may crash and behave unexpectedly.** 
 
 The plugin heavily uses OctoberCMS's AJAX framework. All "empowered" components requests server for views, so it is not possible, to use the plugin without October's AJAX framework. It is a very important thing in some environments to consider.
 
-### Description
-This plugin is trying to mimic the backend behavior of creating lists and forms in components. While developing applications is a very common task to create pages with records list and form to preview, create and update records (CRUDs). Secondly we always have to keep in mind the frontend theme. In this case PowerComponents is the way to go.
+## Description
+This plugin is trying to mimic the backend behavior of creating lists and forms in components. While developing applications is a very common task to create pages with records list and form to preview, create and update records (CRUDs). Secondly, we always have to keep in mind the frontend theme. In this case, PowerComponents is the way to go.
 
-This plugin heavily uses classes and features from OctoberCMS's core and we are doing our best for it to do all those fancy things the backend can. Sometimes those things need to be done a little different, but in most cases October's docs should apply.
+This plugin heavily uses classes and features from OctoberCMS's core and we are doing our best for it to do all those fancy things the backend can. Sometimes those things need to be done a little different, but in most cases, October's docs should apply.
 
 October's docs on:
 * [list columns](https://octobercms.com/docs/backend/lists#column-options)
 * [form fields](https://octobercms.com/docs/backend/forms#form-field-options)
 
+
 [//]: # (Documentation)
 
 ## Quick start
+
 ### Prepare environment
+
 1. Install PowerComponents from MarketPlace
 1. Include necessary tags to your layout:
 
 {% raw %}
-    initbiz/powercomponents/assets/ui/storm.css
-    {% styles %}
-    jquery
-    initbiz/powercomponents/assets/js/powercomponents.js
-    {% framework extras %}
-    {% scripts %}
+
+        initbiz/powercomponents/assets/ui/storm.css
+        {% styles %}
+        jquery
+        initbiz/powercomponents/assets/js/powercomponents.js
+        {% framework extras %}
+        {% scripts %}
+
 {% endraw %}
 
 For example:
 
 {% raw %}
+
     <head>
         <!-- Add PowerComponent Storm UI -->
         <link href="{{ ['$/initbiz/powercomponents/assets/ui/storm.css']|theme }}" rel="stylesheet">
@@ -57,6 +63,7 @@ For example:
     {% framework extras %}
     <!-- Don't forget about additional scripts -->
     {% scripts %}
+
 {% endraw %}
 
 ### Start with creating your first CRUD
@@ -95,7 +102,7 @@ The command creates `createPerson`, `updatePerson`, `previewPerson` and `listPer
     # For example:
     create sites Person
 
-The command creates sites in active theme that has embedded `crud components` the components and optional prefix for URL.
+The command creates sites in the active theme that has embedded `crud components` the components and optional prefix for URL.
 
 #### Register component
     register component <pluginCode>.<pluginName> <componentCode>
@@ -104,7 +111,7 @@ The command creates sites in active theme that has embedded `crud components` th
 
 The command registers `ComponentCode` component in plugin's `Plugin.php` file.
 
-**Note:** The command is parsing the `Plugin.php` as a text file. It backs up the `Plugin.php` file as `Plugin.php.bak` before saving the new version of `Plugin.php` file in case of messing the syntax or doing something unintentional.
+**Note:** The command is parsing the `Plugin.php` as a text file. It backs up the `Plugin.php` file as `Plugin.php.bak` before saving the new version of `Plugin.php` file in case of messing the syntax or doing something unintentionally.
 
 The supported syntax of the `Plugin.php` register methods is for example:
 
@@ -124,15 +131,15 @@ The command works with empty `return [];` and no method as well.
     create crud October.Test Person
 
 The command combines all the foregoing methods, so it:
-1. Creates crud components and registers them in plugin
+1. Creates crud components and registers them in the plugin
 1. Creates crud sites with those components embedded
 
-**Note:** The `create crud` command will ask you if you want to create plugin and model if they do not exist.
+**Note:** The `create crud` command will ask you if you want to create a plugin and model if they do not exist.
 
 ### Developing components
-Controllers differ from components. As a consequence, we cannot treat a component as a controller and give it power to render lists and forms in one class as it is done in backend.
+Controllers differ from components. As a consequence, we cannot treat a component as a controller and give it the power to render lists and forms in one class as it is done in the backend.
 
-In frontend we have to use one component for one purpose. As a consequence there are two classes that extend ComponentBase class:
+In the frontend, we have to use one component for one purpose. As a consequence there are two classes that extend ComponentBase class:
 
 1. ListComponentBase
 2. FormComponentBase
@@ -140,6 +147,7 @@ In frontend we have to use one component for one purpose. As a consequence there
 Their major task is to implement AJAX handlers for the components and they implement all methods that are required by OctoberCMS. 
 
 #### Example, minimal component
+
 Take a look at the minimal component configuration that renders the form:
 
 `PersonCreate.php`:
@@ -186,7 +194,7 @@ Take a look at the minimal component configuration that renders the form:
     {{ form_close() }}
 
 
-Right now all fields of form are defined in `config_form.yaml` file exact the same way as in backend and normal HTML in `default.htm` with `pcrender` `twig` method.
+Right now all fields of the form are defined in `config_form.yaml` file exactly the same way as in backend and normal HTML in `default.htm` with `pcrender` `twig` method.
 
 
 For list the `pcrender` method in `.htm` file should be invoked as follows:
@@ -194,33 +202,34 @@ For list the `pcrender` method in `.htm` file should be invoked as follows:
     {{ pcrender('list', attribute(pcViewBag, __SELF__.alias) ) }}
 
 ### Overriding views
-You can override every view, or its part creating file with the same name as view you want to override. Check the name of the partial you want to override in `/plugins/initbiz/powercomponents/frontendwidgets` or `/plugins/initbiz/powercomponents/frontendformwidgets` directories. For example if you want to override whole list or form, then override `_list.htm` or `_form.htm` partial.
+
+You can override every view, or its part by creating a file with the same name as the view you want to override. Check the name of the partial you want to override in `/plugins/initbiz/powercomponents/frontendwidgets` or `/plugins/initbiz/powercomponents/frontendformwidgets` directories. For example, if you want to override the whole list or form, then override `_list.htm` or `_form.htm` partial.
 
 1. **If you want to override view in a component**, then create the partial file in component's views directory.
 1. **If you want to override view theme wide**, then create `pcviews` directory in theme's root directory and then create the partial file in it.
 
-Of course files defined in component have higher priority than those defined in theme.
+Of course, files defined in component have higher priority than those defined in the theme.
 
-**Note: sometimes overriding views needs to take time because of cache. To see the change faster you can change something (even for a second) in parent's view to reload.**
+**Note: sometimes overriding views need to take time because of the cache. To see the change faster you can change something (even for a second) in parent's view to reload.**
 
-While working with the views, the first thing to understand is that in component (using Twig) you are running method that requests views using AJAX framework. Then the server is rendering partials and responses to AJAX framework, which updates the partial.
+While working with the views, the first thing to understand is that in component (using Twig) you are running a method that requests views using the AJAX framework. Then the server is rendering partials and responses to the AJAX framework, which updates the partial.
 
-**As a consequence, the partials rendered by server are written in PHP (like those in backend), not Twig**. Views written in PHP is a good idea in this case, because those will be edited by developers rather than end users. You have to remember only one rule while writing views in PHP: **Avoid logic in views. There should be only `if`s, `for`s, `foreach`s and `echo`s.**
+**As a consequence, the partials rendered by the server are written in PHP (like those in the backend), not Twig**. Views written in PHP is a good idea in this case because those will be edited by developers rather than end-users. You have to remember only one rule while writing views in PHP: **Avoid logic in views. There should be only `if`s, `for`s, `foreach`s and `echo`s.**
 
 ## Integrations
-PowerComponents can be integrated with another plugins.
+PowerComponents can be integrated with other plugins.
 
 ### Cumulus
-If you do not know what `Cumulus` is, than visit [this page](http://cumulus.init.biz/).
+If you do not know what `Cumulus` is then visit [this page](http://cumulus.init.biz/).
 
-Using the `CumulusIntegrator` trait in your component your lists will be by default filtered by cluster using the `cluter_id` field in database and forms will be feeded with field containing cluster's id, and it will check if user can view, add or update records that are not in current cluster.
+Using the `CumulusIntegrator` trait in your component your lists will be by default filtered by cluster using the `cluter_id` field in database and forms will be fed with the field containing cluster's id, and it will check if the user can view, add or update records that are not in the current cluster.
 
-This way, every model wrapped by the PowerComponents will be available only for the cluster that user is currently in (for example one cluster will not be able to read or update clients of the second cluster).
+This way, every model wrapped by the PowerComponents will be available only for the cluster that the user is currently in (for example one cluster will not be able to read or update clients of the second cluster).
 
 ## Features list
 
 ### Lists
-1. Rendering list of records with searchbox, update url in table, checkboxes, "Create" and "Delete selected" buttons
+1. Rendering list of records with the search box, update the URL in the table, checkboxes, "Create" and "Delete selected" buttons
 1. Sorting list
 1. Searching records
 1. Deleting records
@@ -231,7 +240,7 @@ This way, every model wrapped by the PowerComponents will be available only for 
 1. Rendering create, preview and update forms with appropriate buttons
 1. Saving and updating models
 
-####Form widgets
+### Form widgets
 1. Datepicker
 1. Colorpicker
 1. Relation (dropdown and checkboxlist)
@@ -251,16 +260,16 @@ This way, every model wrapped by the PowerComponents will be available only for 
 1. Test, test, test, and test (stable still waiting) with better automatic tests
 1. Simplify the code (too much responsibility of classes)
 1. Make simpler `pcrender` method (without those 'options' and 'SELF.id' things)
-1. Merge some PoweComponents traits with October's core and remove them from plugin (remove the second group of traits)
-1. Console command to automatically create yaml files using model properties
-1. Run first AJAX request earlier in page load cycle (for faster page loading), or even move it to lower level (render of page or something)
+1. Merge some PoweComponents traits with October's core and remove them from the plugin (remove the second group of traits)
+1. Console command to automatically create YAML files using model properties
+1. Run first AJAX request earlier in page load cycle (for faster page loading), or even move it to the lower level (render of page or something)
 
 ## Translations
-Remember that translations of plugin are not translations of your components. Translations of plugin mostly mean translation of inspector's properties, it's description, name and so on.
+Remember that translations of plugin are not translations of your components. Translations of plugin mostly mean the translation of the inspector's properties, it's description, name and so on.
 
-Labels in forms and column names are defined in your `yaml` file, because they are not related with PowerComponents itself.
+Labels in forms and column names are defined in your `yaml` file because they are not related to PowerComponents itself.
 
-When it comes to texts in buttons, they are defined in PowerComponents `lang` directory. Right now there are only two languages supported: English and Polish, so if you want to have your language available on marketplace, then please send us your translation. We cannot guarantee you full support of your language (we are just developers ;)).
+When it comes to texts on buttons, they are defined in PowerComponents `lang` directory. Right now there are only two languages supported: English and Polish, so if you want to have your language available on the marketplace, then please send us your translation. We cannot guarantee you full support of your language (we are just developers ;)).
 
 ## PowerComponents's assets (CSSs, JSs)
 
