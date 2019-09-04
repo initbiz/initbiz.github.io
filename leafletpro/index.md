@@ -22,7 +22,7 @@ The plugin will automatically install [maxhelias/php-nominatim](https://github.c
 ## Embed the map
 You can embed a map using Leaflet map component.
 
-![Leaflet map component](https://raw.githubusercontent.com/initbizlab/oc-leafletpro-plugin/master/docs/images/leafletmap_component.png)
+![Leaflet map component](https://raw.githubusercontent.com/initbizlab/initbiz.github.io/leafletpro/assets/images/leafletmap_component.png)
 
 As you see in the above screenshot you can specify a few parameters:
 * Longitude and latitude of the center of the map being shown
@@ -32,7 +32,7 @@ As you see in the above screenshot you can specify a few parameters:
 
 ## Customize popup content
 
-![Custom marker popup with InIT.biz logo](https://raw.githubusercontent.com/initbizlab/oc-leafletpro-plugin/master/docs/images/marker_with_initbiz_popup.png)
+![Custom marker popup with InIT.biz logo](https://raw.githubusercontent.com/initbizlab/initbiz.github.io/master/leaflerpro/assets/images/marker_with_initbiz_popup.png)
 
 The popup content is defined individually for every marker. By default it's seeded with the content of `plugins/initbiz/leafletpro/models/marker/_default_popup_content.htm`.
 
