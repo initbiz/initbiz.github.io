@@ -26,7 +26,7 @@ ol.toc-list {
 .js-toc-content h2::before, .js-toc-content h3::before {
     display: block;
     content: " ";
-    height: 60px;
-    margin-top: -60px;
+    height: 85px;
+    margin-top: -85px;
     visibility: hidden;
 }
