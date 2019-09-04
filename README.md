@@ -5,4 +5,4 @@ The docs is available here: [https://docs.init.biz](https://docs.init.biz).
 
 ---
 
-[InIT.biz website](https://www.init.biz) [InIT.biz profile on OctoberCMS's marketplace](https://octobercms.com/author/Initbiz)
+[InIT.biz website](https://www.init.biz) | [OctoberCMS's marketplace](https://octobercms.com/author/Initbiz)
