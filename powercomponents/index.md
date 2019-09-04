@@ -27,12 +27,13 @@ October's docs on:
 ### Prepare environment
 1. Install PowerComponents from MarketPlace
 1. Include necessary tags to your layout:
-  1. `initbiz/powercomponents/assets/ui/storm.css`
-  2. `{% styles %}`
-  3. `jquery`
-  4. `initbiz/powercomponents/assets/js/powercomponents.js`
-  5. `{% framework extras %}`
-  6. `{% scripts %}`
+
+    initbiz/powercomponents/assets/ui/storm.css
+    {% styles %}
+    jquery
+    initbiz/powercomponents/assets/js/powercomponents.js
+    {% framework extras %}
+    {% scripts %}
 
 For example:
 
