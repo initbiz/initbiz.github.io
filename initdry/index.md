@@ -1,5 +1,5 @@
 # InIT DRY - InIT.biz package with useful classes and helpers. 
-![InIT DRY banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/initdry/assets/images/initdry-banner.png)
+![InIT DRY banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/initdry/assets/images/initdry-banner.png)
 
 ## Introduction
 Plugin with set of classes and helpers to be used in third party plugins.

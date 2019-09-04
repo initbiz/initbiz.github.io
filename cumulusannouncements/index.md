@@ -1,5 +1,5 @@
 # Cumulus Announcements -  Announce (notify) users in your Cumulus Core based system 
-![Cumulus Announcements banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/cumulusannouncements/assets/images/cumulus-announcements-banner.png)
+![Cumulus Announcements banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/cumulusannouncements/assets/images/cumulus-announcements-banner.png)
 
 ## Introduction
 

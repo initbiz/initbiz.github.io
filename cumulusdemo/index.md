@@ -1,5 +1,5 @@
 # Cumulus Demo - Seed your Cumulus based app and make Cumulus theme work. 
-![Cumulus Demo banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/cumulusdemo/assets/images/cumulus-demo-banner.png)
+![Cumulus Demo banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/cumulusdemo/assets/images/cumulus-demo-banner.png)
 
 ## Introduction
 
@@ -11,7 +11,7 @@ The plugin is created just for demonstration purpose, to show you how Cumulus wo
 
 See it in action in the following video:
 
-[![Cumulus demo video thumbnail](https://github.com/initbizlab/initbiz.github.io/raw/master/cumuluscore/assets/images/youtube_demo_screenshot.png)](https://www.youtube.com/watch?v=Y0-OvGzmP5w)
+[![Cumulus demo video thumbnail](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/youtube_demo_screenshot.png)](https://www.youtube.com/watch?v=Y0-OvGzmP5w)
 
 [//]: # (Documentation)
 

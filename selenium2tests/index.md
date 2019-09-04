@@ -1,5 +1,5 @@
 # Selenium 2 Tests - Write tests using Selenium 2 with Dusk support 
-![Selenium 2 Tests banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/selenium2tests/assets/images/selenium2tests-banner.png)
+![Selenium 2 Tests banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/selenium2tests/assets/images/selenium2tests-banner.png)
 
 ## Introduction
 

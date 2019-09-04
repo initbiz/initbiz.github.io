@@ -1,5 +1,5 @@
 # Newsletter - Send newsletter e-mails to subscribers (GDPR ready)
-![Newsletter banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/newsletter/assets/images/newsletter-banner.png)
+![Newsletter banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/newsletter/assets/images/newsletter-banner.png)
 
 ## Introduction
 

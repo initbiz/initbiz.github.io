@@ -1,5 +1,5 @@
 # Cumulus Plus - Add dashboard and settings pages within seconds in your Cumulus based app
-![Cumulus Plus banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/cumulusplus/assets/images/cumulus-plus-banner.png)
+![Cumulus Plus banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/cumulusplus/assets/images/cumulus-plus-banner.png)
 
 ## Introduction
 

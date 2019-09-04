@@ -1,5 +1,5 @@
 # GusApi - Use GUS API to get information from REGON in your project. 
-![GusApi banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/gusapi/assets/images/gusapi-banner.png)
+![GusApi banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/gusapi/assets/images/gusapi-banner.png)
 
 ## Introduction
 
@@ -28,6 +28,6 @@ If you want to connect to production, ensure you have:
     $initbiz = collect($gus->getByNip('8661738221'))->first();
 
 ### Troubleshooting
-Right now installing plugin from Marketplace does not pull `vendor` with original `GusApi` dependencies. So for now you have to download [`composer.json`](https://github.com/initbizlab/oc-gusapi-plugin/blob/master/composer.json) file to `plugins/initbiz/gusapi` directory and in project root run `composer update gusapi/gusapi`.
+Right now installing plugin from Marketplace does not pull `vendor` with original `GusApi` dependencies. So for now you have to download [`composer.json`](https://github.com/initbiz/oc-gusapi-plugin/blob/master/composer.json) file to `plugins/initbiz/gusapi` directory and in project root run `composer update gusapi/gusapi`.
 
 It is probably a bug in OctoberCMS's Marketplace. It was reported, but waits for October team to take action.

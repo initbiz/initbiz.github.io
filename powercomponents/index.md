@@ -1,5 +1,5 @@
 # Power Components - Create forms and lists in frontend the way you love from backend (but with overriding views ;) ) 
-![Power Components banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/powercomponents/assets/images/powercomponents-banner.png)
+![Power Components banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/powercomponents/assets/images/powercomponents-banner.png)
 
 ## Introduction
 

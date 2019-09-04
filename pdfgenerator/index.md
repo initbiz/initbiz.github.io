@@ -1,5 +1,5 @@
 # PDF Generator -
-![PDF Generator banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/pdfgenerator/assets/images/pdfgenerator-banner.png)
+![PDF Generator banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/pdfgenerator/assets/images/pdfgenerator-banner.png)
 
 ## Introduction
 

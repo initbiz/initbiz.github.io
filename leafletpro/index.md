@@ -1,5 +1,5 @@
 # LeafletPro - Embed a Leaflet map (OpenStreetMap) on your website with ease
-![LeafletPro banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/leafletpro/assets/images/leafletpro-banner.png)
+![LeafletPro banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/leafletpro/assets/images/leafletpro-banner.png)
 
 ## Introduction
 
@@ -15,14 +15,14 @@ You can install the plugin using any of the following methods:
 
 1. Install using [OctoberCMS marketplace](https://octobercms.com/plugin/initbiz-leafletpro)
 1. Install using composer: `composer require initbiz/oc-leafletpro-plugin`
-1. Clone the [GitHub repo](https://github.com/initbizlab/oc-leafletpro-plugin) to `plugins/initbiz/leafletpro` directory of your project and run composer install in your project's directory
+1. Clone the [GitHub repo](https://github.com/initbiz/oc-leafletpro-plugin) to `plugins/initbiz/leafletpro` directory of your project and run composer install in your project's directory
 
 The plugin will automatically install [maxhelias/php-nominatim](https://github.com/maxhelias/php-nominatim), which is used to query [Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) service. If you are going to use the Nominatim service, recall the [Nominatim usage policy](https://operations.osmfoundation.org/policies/nominatim/).
 
 ## Embed the map
 You can embed a map using Leaflet map component.
 
-![Leaflet map component](https://raw.githubusercontent.com/initbizlab/initbiz.github.io/leafletpro/assets/images/leafletmap_component.png)
+![Leaflet map component](https://raw.githubusercontent.com/initbiz/initbiz.github.io/leafletpro/assets/images/leafletmap_component.png)
 
 As you see in the above screenshot you can specify a few parameters:
 * Longitude and latitude of the center of the map being shown
@@ -32,7 +32,7 @@ As you see in the above screenshot you can specify a few parameters:
 
 ## Customize popup content
 
-![Custom marker popup with InIT.biz logo](https://raw.githubusercontent.com/initbizlab/initbiz.github.io/master/leaflerpro/assets/images/marker_with_initbiz_popup.png)
+![Custom marker popup with InIT.biz logo](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/leaflerpro/assets/images/marker_with_initbiz_popup.png)
 
 The popup content is defined individually for every marker. By default it's seeded with the content of `plugins/initbiz/leafletpro/models/marker/_default_popup_content.htm`.
 
