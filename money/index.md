@@ -1,4 +1,4 @@
-# Money - Plugin to use money in OctoberCMS painlessly. 
+# Money - Plugin to use money in OctoberCMS painlessly 
 ![Money banner](https://raw.githubusercontent.com/initbizlab/initbizlab.github.io/master/money/assets/images/money-banner.png)
 
 # Introduction
