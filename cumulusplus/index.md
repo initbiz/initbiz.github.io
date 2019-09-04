@@ -22,6 +22,7 @@ Using this plugin you can create nice looking dashboard and settings panel in se
 
 In order to register your component as a dashboard component you have to use `registerCumulusDashboards` method in your `Plugin.php` file:
 
+
     public function registerComponents()
     {
         return [
@@ -41,6 +42,7 @@ In order to register your component as a dashboard component you have to use `re
         ];
     }
 
+
 The key of the array is the name of the component (from `registerComponents` method). In the example above we have component registered as `myFeatureDashboard`.
 
 The grid in the dashboard is 12-columns, so in this example, the box will be full width. By now boxes are positioned automatically.
@@ -52,6 +54,7 @@ If you want to manipulate other components parameters before passing them to the
 ## Settings component
 
 In order to register your component as the settings component you have to use the `registerCumulusSettings` method in your `Plugin.php` file:
+
 
     public function registerComponents()
     {
@@ -70,6 +73,7 @@ In order to register your component as the settings component you have to use th
             ]
         ];
     }
+
 
 The key of the array is the name of the component in `registerComponents` method. In the example above we have component registered as `myFeatureSettings`.
 
