@@ -11,8 +11,8 @@ Using the `Ui2TestCase` class from this plugin this should be much easier. What 
 
 ## How-to
 ### System requirements
-1. Java 8 installed in default location of your platform (for example `/usr/bin/java` for linux)
-1. Driver of the browser you want to use for tests (for example [ChromeDriver](http://chromedriver.chromium.org/getting-started))
+1. Java 8 installed in default location of your platform (for example `/usr/bin/java` for Linux)
+1. The driver of the browser you want to use for tests (for example [ChromeDriver](http://chromedriver.chromium.org/getting-started))
 
 > **Note for Linux users**
 >
@@ -36,15 +36,15 @@ Using the `Ui2TestCase` class from this plugin this should be much easier. What 
 ### Testing OctoberCMS basics
 It is a good practice not to use the same DB for testing and developing purposes.
 
-In order to configure different database for testing purposes create directory `testing` in `config` directory and copy `database.php` to the newly created directory. Then change the default connection as you wish.
+In order to configure a different database for testing purposes create directory `testing` in `config` directory and copy `database.php` to the newly-created directory. Then change the default connection as you wish.
 
-After that if you use `APP_ENV=testing` in your `.env` file, configuration from `testing` directory will be used.
+After that, if you use `APP_ENV=testing` in your `.env` file, configuration from the `testing` directory will be used.
 
 ## Writing tests in Selenium 2
 There are example tests in `tests/example` directory that use `Ui2TestCase` class.
 
 ## Running tests
-First of all, you have to run Selenium 2 standalone server which is included in the package. In order to start Selenium 2 server go to `<project_root>/plugins/initbiz/selenium2tests` and run `java -jar selenium.jar`.
+First of all, you have to run the Selenium 2 standalone server which is included in the package. In order to start Selenium 2 server go to `<project_root>/plugins/initbiz/selenium2tests` and run `java -jar selenium.jar`.
 
 You are ready to run tests using PHPUnit from OctoberCMS's `vendor/bin/phpunit`.
 
