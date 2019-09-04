@@ -39,6 +39,7 @@ October's docs on:
 
 For example:
 
+{% raw %}
     <head>
         <!-- Add PowerComponent Storm UI -->
         <link href="{{ ['$/initbiz/powercomponents/assets/ui/storm.css']|theme }}" rel="stylesheet">
@@ -56,6 +57,7 @@ For example:
     {% framework extras %}
     <!-- Don't forget about additional scripts -->
     {% scripts %}
+{% endraw %}
 
 ### Start with creating your first CRUD
 Run `php artisan pc:util create crud Initbiz.ExamplePlugin Client` and answer `yes` to all questions.
