@@ -32,7 +32,7 @@ After that, you are ready to play with Cumulus based app with example data seede
 
 [![Cumulus demo video thumbnail](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/youtube_demo_screenshot.png)](https://www.youtube.com/watch?v=Y0-OvGzmP5w)
 
-## Terms used in the Cumulus and this document
+## Terms explanation
 
 ### Frontend user / User
 Frontend users are managed by `RainLab.User` plugin. They can log in to your application and in most cases they will be your clients' accounts. See [RainLab.User documentation](https://octobercms.com/plugin/rainlab-user) for more info about this. 
@@ -55,15 +55,16 @@ Clusters add one more abstraction layer between user roles and permissions in th
 
 Plans are used to organize sets of Cumulus features (see below) that are given to clusters. A cluster can have only one plan assigned at a time, but a lot of clusters can have the same plan.
 
-The easiest way to get the idea is to check an example pricing table like here (see below). Plans in this example are "Free", "Plus" and "Pro".
+The easiest way to get the idea is to imagine an example pricing table with plans like "Free", "Plus" and "Pro".
 
 ### (Cumulus) Features
 
 Cumulus Features (or just features) are parts of the whole functionality of our application. Access to them is given to clusters by assigning them to plans. Every plugin of yours can register its own features (see below).
 
-The easiest way to get the idea is to check the example pricing table again and take a look at rows in it.
+![Example plan](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/example-plan.png)
 
 ### Clusters' usernames
+
 Clusters' usernames are unique strings to be used in URLs so that URLs can be changed by the client the way they want to. The same feature on Facebook and Twitter is called `username` so we decided to use name `username` as well.
 
 Using usernames has to be enabled in general Cumulus settings (`using usernames in URLs`). By default Cumulus will use cluster's slug.
@@ -124,41 +125,35 @@ What is more, you can select features that will be required to show the entry in
 
 #### `UserClustersList`
 
-The component's role is to render a view to select the cluster if the user is assigned to more than one cluster.
-
-> Note: If the user is assigned to one cluster then the component will automatically redirect to `Cluster dashboard page`
+The component is rendering a view for a user to select the cluster he/she wants to enter. If the user is assigned to only one cluster then the component will transparently redirect browser as it were clicked.
 
 ![Clusters list component](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/user-cluster-list-component.png)
 
 #### `CumulusGuard``
 
-The `CumulusGuard` component is here to check if the logged-in user has access to the cluster that he/she tries to visit. It uses cluster slug from URL.
+The `CumulusGuard` component is checking if a logged-in user has access to the cluster that he/she tries to visit.
 
-What is more, the component pushes two variables to view:
-* `cluster` which contains current cluster's slug
-* `clusterData ` which contains an array of the current cluster data.
-
-and sets active cluster's slug in session variable and cookie as `cumulus_clusterslug`.
+What is more, the component pushes the current `cluster` to the page object and sets active cluster's slug in session variable and cookie as `cumulus_clusterslug`.
 
 #### `FeatureGuard`
 
-Feature guard is a component that ensures if the current cluster can see the page based on features it has access to.
+Feature guard is checking if the current cluster can see the page based on features it has access to.
 
 **Remember that only one of the checked features is enough to let the user see the page**
 
-![Feature guard](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/feature-guard.png)
+> If you want to filter content on one page basing on features, use `canEnterFeature` twig function (see below).
 
-> If you want to filter content on one page so that only a cluster that has access to this feature can see it use `canEnterFeature` twig function described below.
+![Feature guard](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/feature-guard.png)
 
 ### `ClusterFiltrable` trait
 
 #### Filtering data by cluster
 
-You can easily filter the model data by using `ClusterFiltrable` trait.
+You can easily filter the data returned by the model using `ClusterFiltrable` trait.
 
-If you have `cluster_id` as a relation for your model, you can easily filter the data by using `clusterIdFiltered()` method.
+If you have `cluster_id` as a relation column for your model, you can easily filter the data by using `clusterIdFiltered()` method.
 
-If you have `cluster_slug` in your model to than you can alternatively use `clusterFiltered()` method.
+If you have `cluster_slug` in your model as a relation column than you can alternatively use `clusterFiltered()` method.
 
 You can also customize the attribute and the column by specifying other parameters like:
 
@@ -166,7 +161,7 @@ You can also customize the attribute and the column by specifying other paramete
 
 #### Cluster unique
 
-If you want to check if a parameter is unique in the cluster scope (for example invoice number, that can safely collide with other clusters) then you can use `clusterUnique` method from the trait.
+If you want to check if a parameter is unique in the cluster scope (for example invoice number that can safely collide with other clusters but cannot be the same for one cluster) then you can use `clusterUnique` method from the trait.
 
 The method returns validation rule for October's validator which you can use in the model's constructor.
 
@@ -180,26 +175,24 @@ For example, to check if `invoice_number` is unique in the cluster scope we can 
     }
 
 
-If you want to customize specify the table name or column name to build a unique rule then you have to use parameters in the method. By default it will use `$this->table` attribute and `cluster_slug` as a column name, for example:
+If you want to customize the table name or column name to build a unique rule then you have to use parameters in the method. By default it will use `$this->table` attribute and `cluster_slug` as a column name, for example:
 
-    $this->rules['invoice_number'] = $this->clusterUnique('invoice_number', 'invoices', 'cluster_id');
+    $this->rules['invoice_number'] = $this->clusterUnique('invoice_number', 'invoices', 'slug');
 
 You can alternatively use `clusterIdUnique` method if your data is to be filtered by cluster's id.
 
 ## Additional features
 
 ### Auto assign
-Auto assigning is Cumulus functionality that automatically assigns users and clusters during their registering. You can create a lot of different configurations so it should meet your expectations.
-
-Go to Settings -> Cumulus -> Auto assign where you will find two tabs: "Auto assign users" and "Auto assign clusters".
+Auto assigning is a Cumulus functionality that automatically assigns users and clusters during their registration. Go to `Settings -> Cumulus -> Auto assign` and you will find two tabs: "Auto assign users" and "Auto assign clusters".
 
 #### Auto assign users
 ![Auto assign users](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/auto-assign-users.png)
 
 While auto assigning users to clusters you can decide whether you want to:
-* create a new cluster using variable specified in "variable name" (for example company name)
-* choose existing cluster for every newly registered user
-* get cluster slug from variable
+* create a new cluster using variable specified in "variable name (for example "Company name" from variable `companyName`),
+* choose existing cluster for every newly registered user,
+* get cluster slug from variable (for example variable called `companyName`),
 
 You can also decide whether you want to add a user to a group (`RainLab.UserGroup`) after registering or not.
 
@@ -207,12 +200,12 @@ You can also decide whether you want to add a user to a group (`RainLab.UserGrou
 ![Auto assign clusters](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/auto-assign-clusters.png)
 
 While auto assigning clusters to plans you can decide if you want to:
-* assign the user to concrete plan (in most cases something like Free or Trial) or
+* assign the cluster to concrete plan (in most cases something like `Free` or `Trial`) or
 * get the plan from a variable (if you have more then one plan that cluster can be assigned)
 
 Please note that:
 * auto assigning clusters will work only if creating a new cluster is enabled in "Auto assign users" tab
-* auto assigning clusters to plans from variable will be possible only when you allow that in the plan definition
+* auto assigning clusters to plans from variable will be possible only when you allow that in the plan
 
 ### Registering cluster's features
 
@@ -220,7 +213,7 @@ Please note that:
 
 Every time a cluster obtains access to a feature (**for the first time, once**) we call it registering cluster's feature. Registering clusters' features is the process of running some 'registering' code when a cluster gets access to a feature whether by changes of the cluster's plan or plan's features.
 
-To register a feature you have to bind to `initbiz.cumuluscore.registerClusterFeature` event and check if it is your feature being registered right now like in the example below:
+To register a cluster's feature you have to bind to the `initbiz.cumuluscore.registerClusterFeature` event like that:
 
 
     Event::listen('initbiz.cumuluscore.registerClusterFeature', function ($cluster, $featureCode) {
@@ -236,7 +229,7 @@ The event is blocking so if you decide to stop the process of registration then 
 
 If you use `usernames` feature then you have to ensure that they are unique.
 
-The `Helpers::usernameUnique` method ensures that the username is unique in the cluster's table, but you can run your own logic using the `initbiz.cumuluscore.usernameUnique` event.
+The `Helpers::usernameUnique` method ensures that the username is unique in the cluster's table, but you can extend its logic by using the `initbiz.cumuluscore.usernameUnique` event.
 
 ### `canEnterFeature()` Twig extension
 
@@ -244,93 +237,19 @@ If you want to check in twig if current cluster has access to "feature.code" tha
 
 For example:
 
+
     {% if canEnterFeature('initbiz.cumulusdemo.paid_feature') %}
         Something visible only to those who have access to initbiz.cumulusdemo.paid_feature.
     {% endif %}
 
 
-## Example usecase
+## Contributions / Issues
 
-Example usage for our client will be as follows:
-1. User visits the login page and after successfully logging in he/she will be redirected to "Choose cluster" page (screenshot below)
-1. After he/she chooses a cluster he/she will be redirected to the cluster's dashboard.
+If you want to get in touch with us you can write to [contact@init.biz](mailto:contact@init.biz) or directly to @tomaszstrojny on OctoberCMS's official Slack.
 
-On the "Choose cluster" page will be the `UserClustersList` component embedded which automatically redirects the user to cluster's dashboard if he/she is assigned to only one cluster.
+Every contribution is very welcomed, thank you for your time in advance.
 
-
-    $cluster = Helpers::getClusterFromUrlParam($this->property('clusterUniq'));
-
-Notice however that `CumulusGuard` component injects `cluster` object to pages that use it (or their layout).
-
-
-
-### Login page
-The login page can use the `Account` component from `RainLab.Users` plugin. It should be configured so that it automatically redirects to the "Choose cluster" page after successfully logging in.
-
-![Login page](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/login-page.png)
-
-### "Choose cluster" page
-On "Choose cluster" page should be `UserClustersList` component embedded. It will automatically redirect the user to the cluster's dashboard if he/she is assigned to only one cluster.
-
-![Choose cluster page](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/choose-cluster-page.png)
-
-### Cluster's dashboard
-Welcome screen for everyone in the cluster. Place for statistics (and [Cumulus Plus](https://octobercms.com/plugin/initbiz-cumulusplus) component).
-
-![Cluster's dashboard page](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/cluster-dashboard-page.png)
-
-From this level, every page's URL should contain cluster slug variable. By default it is `:cluster` but it can be changed in the component. So from now, all pages will have URL similar to this:
-
-![Cluster's dashboard page view](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/cluster-dashboard-page-view.png)
-
-### Feature pages
-Every page of your system that provides some functionality is considered as "Feature page". So here is where Cumulus cannot help anymore (and tries to not disturb you with unnecessary code bloat).
-
-
-
-
-
-Features are assigned to plans. So that every cluster that has a particular plan has the same set of features. It is a good idea to have them as many as possible to make the application customizable.
-
-![Example plan](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/example-plan.png)
-
-Before creating and using features it is a good idea to read about the `FeatureGuard` component below.
-
-
-
-
-## More info
-
-## Rainlab.User note
-
-The plugin extends RainLab.User plugin and uses the same `User` model, so if you want to restrict backend admin to manage users remember that there is controller from RainLab.Users that use the same Model and can access the same data.
-
-### Troubleshooting
-
-#### I cannot see my registered features
-
-If you cannot see your features then go to Settings -> Cumulus -> Features and click the `Clear feature cache` button.
-
-### Contributing
-
-Every contribution is very welcomed, especially from professional devs who can suggest the better organization of code. Thanks for your time in advance :)
-
-Post your issues or pull requests via [GitHub](https://github.com/initbiz/oc-cumuluscore-plugin).
-
-## Contact us
-
-Get in touch using:
-
-1. mail: contact@init.biz
-1. official OctoberCMS's Slack (@tomaszstrojny)
-
-### Documentation helpers
-
-#### Example pricing table
-
-Here you have an example pricing table with plans that you can create using Cumulus. The image is here only for reference purposes and is not related to Cumulus itself.
-
-![Pricing table example](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/pricing-table.png)
+Post your issues or pull requests via [GitHub](https://github.com/initbiz/oc-cumuluscore-plugin) or [Product support page](https://octobercms.com/plugin/support/initbiz-cumuluscore).
 
 ## Upgrade guide
 
@@ -363,7 +282,7 @@ All repositories:
 
 `PlanRepository`:
 
-1. `getPlansUsers($plansSlugs)` -> `$plan->getUsers()` + foreach and `unique()`.
+1. `getPlansUsers($plansSlugs)` -> `$plan->users` + foreach and `unique()`.
 
 `ClusterRepository`:
 
