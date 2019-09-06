@@ -10,6 +10,16 @@ h1 {
     font-size: 2rem;
 }
 
+h2 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
 footer h1 {
     font-size: 1.5rem;
     text-align: right;
@@ -33,4 +43,10 @@ ol.toc-list {
     height: 85px;
     margin-top: -85px;
     visibility: hidden;
+}
+
+.js-toc-content blockquote {
+    border-radius: 3px;
+    background: #F2F2F2;
+    border-left: 7px solid #64AE5B;
 }

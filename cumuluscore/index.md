@@ -1,13 +1,11 @@
-# Cumulus Core - create a SaaS (multi-tenant) application in OctoberCMS
+# Cumulus Core - create a multi-tenant SaaS application in OctoberCMS
 ![Cumulus banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/cumuluscore/assets/images/cumulus-banner.png)
 
 ## Introduction
 
-The plugin is a skeleton for building Software as a Service (SaaS, multi-tenant) applications using OctoberCMS. SaaS is (according to Wikipedia) a software licensing and delivery model in which software is licensed on a subscription basis and is centrally hosted.
+The plugin is a skeleton for building multi-tenant SaaS (Software as a Service) applications using OctoberCMS.
 
-The easiest way to understand the contept is to imagine an application that you want to create for your clients (one application for more than one client) but it is going to be hosted on your server.
-
-Here are some use cases where Cumulus may help:
+Here are some examples where Cumulus may help:
 * system for your clients' companies where they can have their private data in the cloud (your server) while other clients cannot see each other's data - like invoicing system, client management system, etc.
 * system for schools where classes can share some data and have access to some data while cannot see other classes data like exams system, school diary, etc.
 * every system that supports cutting functionality for different plans (like "Free", "Plus", "Pro", etc.)
@@ -28,7 +26,7 @@ If you want to play with Cumulus right away (see the video below):
 1. install [Cumulus theme](https://octobercms.com/theme/initbiz-cumulus)
 1. run `php artisan cumulus:seed` command
 
-After that, you are ready to play with Cumulus based app with example data seeded (user `demo@example.com` with password `demo`) :). See [Cumulus Demo](https://octobercms.com/plugin/initbiz-cumulusdemo) documentation for more info about the command.
+After that, you are ready to play with a Cumulus based app with example data seeded (user `demo@example.com` with password `demo`) :). See [Cumulus Demo](https://octobercms.com/plugin/initbiz-cumulusdemo) documentation for more info about the command.
 
 [![Cumulus demo video thumbnail](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/youtube_demo_screenshot.png)](https://www.youtube.com/watch?v=Y0-OvGzmP5w)
 
@@ -41,11 +39,13 @@ By design, your clients' accounts have to have restricted access to the applicat
 
 ### Backend user / Admin
 
-Backend users / admins are developers or application owners. By design backend users have access to application panel and features like registered users, their subscriptions, invoices, stats and so on.
+Backend users / admins are developers or application owners. By design backend users have access to application panel and places like: registered users, their subscriptions, invoices, usage stats and so on.
 
 ### Cluster
 
 Clusters are groups of users who share some data between them and can be described as one entity. The most common example is the company but it also applies to offices, office branches, classes in school, schools, etc.
+
+> You can understand clusters as tenants in multi-tenant architecture but remember that, in Cumulus, a user can have access to more than one cluster.
 
 **Clusters are not `usergroup`s from `RainLab.User` plugin (like `guest`, `registered` and so on)**
 
@@ -65,7 +65,7 @@ Cumulus Features (or just features) are parts of the whole functionality of our 
 
 ### Clusters' usernames
 
-Clusters' usernames are unique strings to be used in URLs so that URLs can be changed by the client the way they want to. The same feature on Facebook and Twitter is called `username` so we decided to use name `username` as well.
+Clusters' usernames are unique strings to be used in URLs so that URLs can be changed by the client the way they want to. The same feature on Facebook and Twitter is called `username` so we decided to use the name `username` as well.
 
 Using usernames has to be enabled in general Cumulus settings (`using usernames in URLs`). By default Cumulus will use cluster's slug.
 
@@ -80,22 +80,24 @@ In Cumulus we specify four groups of pages that according to content we provide 
 1. publicly visible, where we put our offer, regulations, contact form, login form, register form, etc.,
 1. pages for registered and logged in users, where they can manage their profiles, read messages, select cluster they want to enter etc.,
 1. visible only to users assigned to cluster, like cluster's dashboard, cluster settings etc.,
-1. visible only to clusters that has access to particular features (described here)
+1. visible only to clusters that has access to particular features
 
 Accordingly, we will create the following pages:
 
 1. public pages such as login page and other public pages,
-1. pages that require the user to be logged in should have `Session` component from `RainLab.User` embedded and configured,
-1. pages that require the user to be assigned to a particular cluster should have the `CumulusGuard` component embedded,
-1. pages that require the current cluster to have access to a particular feature should have the `FeatureGuard` componend embedded and configured.
+1. pages that require the user to be logged in that have `Session` component from `RainLab.User` embedded and configured,
+1. pages that require the user to be assigned to a particular cluster that have the `CumulusGuard` component embedded,
+1. pages that require the current cluster to have access to a particular feature that have the `FeatureGuard` componend embedded and configured.
 
-So if you want to check if the user is:
+See the [demo app](https://www.cumulusdemo.init.biz) to get the idea.
+
+As a consequence, if you want to check if the user is:
 
 1. signed in,
 1. assigned to a cluster and
 1. the cluster has access to a feature
 
-then you have to embed all those components (`Session`, `CumulusGuard` and `FeatureGuard`) on your page or layout:
+you have to embed all the components (`Session`, `CumulusGuard` and `FeatureGuard`) on one page (or its layout):
 
 ![Feature guard](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/feature-guard.png)
 
@@ -115,11 +117,11 @@ You can register Cumulus features using the `registerCumulusFeatures` method in 
 
 ### Preparing menu
 
-If you want to build a application menu for your users, use [Rainlab.Pages](https://octobercms.com/plugin/rainlab-pages) menu feature. Cumulus extends the plugin and adds it's own menu item type: Cumulus page.
+If you want to build an application menu for your users, use [Rainlab.Pages](https://octobercms.com/plugin/rainlab-pages) menu builder feature. Cumulus extends the plugin and adds it's own menu item type: Cumulus page.
 
 If you select the type then the cluster's username or slug will be automatically injected in the URL.
 
-What is more, you can select features that will be required to show the entry in menu. Remember that only one feature is enough to show the menu (more like logical "or" than "and"). If no feature is checked, than everybody will see it.
+What is more, you can select features that will be required to show the entry in menu. Remember that only one feature is enough to show the menu (more like logical "or" than "and"). If no feature is selected then everybody will see the menu entry.
 
 ![Static menu in Cumulus](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/menu-static-pages.png)
 
@@ -131,7 +133,7 @@ The component is rendering a view for a user to select the cluster he/she wants 
 
 ![Clusters list component](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/user-cluster-list-component.png)
 
-#### `CumulusGuard``
+#### `CumulusGuard`
 
 The `CumulusGuard` component is checking if a logged-in user has access to the cluster that he/she tries to visit.
 
@@ -143,7 +145,7 @@ Feature guard is checking if the current cluster can see the page based on featu
 
 **Remember that only one of the checked features is enough to let the user see the page**
 
-> If you want to filter content on one page basing on features, use [`canEnterFeature`](https://docs.init.biz/cumuluscore/#canenterfeature-twig-extension).
+> If you want to filter content on one page basing on features, use [`canEnterFeature Twig function`](https://docs.init.biz/cumuluscore/#canenterfeature-twig-function).
 
 ![Feature guard](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/feature-guard.png)
 
@@ -153,9 +155,13 @@ Feature guard is checking if the current cluster can see the page based on featu
 
 You can easily filter the data returned by the model using `ClusterFiltrable` trait.
 
-If you have `cluster_id` as a relation column for your model, you can easily filter the data by using `clusterIdFiltered()` method.
+If you have `cluster_id` as a relation column for your model, you can easily filter the data by using `clusterIdFiltered()` method:
 
-If you have `cluster_slug` in your model as a relation column than you can alternatively use `clusterFiltered()` method.
+    Invoices::clusterIdFiltered()->get();
+
+If you have `cluster_slug` in your model as a relation column than you can alternatively use `clusterFiltered()` method:
+
+    Invoices::clusterFiltered()->get();
 
 You can also customize the attribute and the column by specifying other parameters like:
 
@@ -186,7 +192,7 @@ You can alternatively use `clusterIdUnique` method if your data is to be filtere
 ## Additional features
 
 ### Auto assign
-Auto assigning is a Cumulus functionality that automatically assigns users and clusters during their registration. Go to `Settings -> Cumulus -> Auto assign` and you will find two tabs: "Auto assign users" and "Auto assign clusters".
+Auto assigning is a Cumulus function that automatically assigns users and clusters during their registration. Go to `Settings -> Cumulus -> Auto assign` and you will find two tabs: "Auto assign users" and "Auto assign clusters".
 
 #### Auto assign users
 ![Auto assign users](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/auto-assign-users.png)
@@ -203,9 +209,9 @@ You can also decide whether you want to add a user to a group (`RainLab.UserGrou
 
 While auto assigning clusters to plans you can decide if you want to:
 * assign the cluster to concrete plan (in most cases something like `Free` or `Trial`) or
-* get the plan from a variable (if you have more then one plan that cluster can be assigned)
+* get the plan from a variable (if you want to send the plan from registration form)
 
-Please note that:
+**Remember**:
 * auto assigning clusters will work only if creating a new cluster is enabled in "Auto assign users" tab
 * auto assigning clusters to plans from variable will be possible only when you allow that in the plan
 
@@ -217,37 +223,35 @@ Every time a cluster obtains access to a feature (**for the first time, once**) 
 
 To register a cluster's feature you have to bind to the `initbiz.cumuluscore.registerClusterFeature` event like that:
 
-
     Event::listen('initbiz.cumuluscore.registerClusterFeature', function ($cluster, $featureCode) {
         if ($featureCode === "initbiz.cumulusinvoices.manage_invoices") {
             // perform some registering code, for example, seed tables for the cluster with sample data
         }
     });
 
-
 The event is blocking so if you decide to stop the process of registration then return false and an exception will be thrown.
 
 ### Extend clusters' usernames unique rule
 
-If you use `usernames` feature then you have to ensure that they are unique.
+If you use usernames feature then you have to ensure that they are unique.
 
 The `Helpers::usernameUnique` method ensures that the username is unique in the cluster's table, but you can extend its logic by using the `initbiz.cumuluscore.usernameUnique` event.
 
-### `canEnterFeature()` Twig extension
+Using the `UpdateCluster` component from [Cumulus plus](https://octobercms.com/plugin/initbiz-cumulusplus) it will automatically check if the username is unique.
 
-If you want to check in twig if current cluster has access to "feature.code" than use `canEnterFeature('feature.code')` Twig function.
+### `canEnterFeature()` Twig function
+
+If you want to check in views if current cluster has access to a feature than use `canEnterFeature('feature.code')` Twig function.
 
 For example:
-
 
     {% if canEnterFeature('initbiz.cumulusdemo.paid_feature') %}
         Something visible only to those who have access to initbiz.cumulusdemo.paid_feature.
     {% endif %}
 
-
 ## Contributions / Issues
 
-If you want to get in touch with us you can write to [contact@init.biz](mailto:contact@init.biz) or directly to @tomaszstrojny on OctoberCMS's official Slack.
+If you want to get in touch, write to [contact@init.biz](mailto:contact@init.biz) or directly to @tomaszstrojny on OctoberCMS's official Slack.
 
 Every contribution is very welcomed, thank you for your time in advance.
 
