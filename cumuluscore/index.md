@@ -8,9 +8,9 @@ The plugin is a skeleton for building Software as a Service (SaaS, multi-tenant)
 The easiest way to understand the contept is to imagine an application that you want to create for your clients (one application for more than one client) but it is going to be hosted on your server.
 
 Here are some use cases where Cumulus may help:
-* system for your clients' companies where they can have their private data in the cloud (your server) while other clients cannot see each other's data like invoicing system, client management system, etc.
+* system for your clients' companies where they can have their private data in the cloud (your server) while other clients cannot see each other's data - like invoicing system, client management system, etc.
 * system for schools where classes can share some data and have access to some data while cannot see other classes data like exams system, school diary, etc.
-* every system that supports cutting functionality for different plans (like "Free", "Plus", "Pro") like in the example in documentation in the 'Example pricing table' section.
+* every system that supports cutting functionality for different plans (like "Free", "Plus", "Pro", etc.)
 
 [//]: # (Documentation)
 
@@ -49,17 +49,17 @@ Clusters are groups of users who share some data between them and can be describ
 
 **Clusters are not `usergroup`s from `RainLab.User` plugin (like `guest`, `registered` and so on)**
 
-Clusters add one more abstraction layer between user roles and permissions in the application. This means you can give a cluster a part of functionality in your system. In Cumulus we use Features to do it (see below).
+Clusters add one more abstraction layer between user roles and permissions in the application. This means you can give a cluster a part of functionality in your system. In Cumulus we use [features](https://docs.init.biz/cumuluscore/#cumulus-features) to do it.
 
 ### Plan
 
-Plans are used to organize sets of Cumulus features (see below) that are given to clusters. A cluster can have only one plan assigned at a time, but a lot of clusters can have the same plan.
+Plans are used to organize sets of Cumulus [features](https://docs.init.biz/cumuluscore/#cumulus-features) that are given to clusters. A cluster can have only one plan assigned at a time, but a lot of clusters can have the same plan.
 
 The easiest way to get the idea is to imagine an example pricing table with plans like "Free", "Plus" and "Pro".
 
 ### (Cumulus) Features
 
-Cumulus Features (or just features) are parts of the whole functionality of our application. Access to them is given to clusters by assigning them to plans. Every plugin of yours can register its own features (see below).
+Cumulus Features (or just features) are parts of the whole functionality of our application. Access to them is given to clusters by assigning them to plans. Every plugin of yours can [register its own features](https://docs.init.biz/cumuluscore/#registering-cumulus-features).
 
 ![Example plan](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/example-plan.png)
 
@@ -70,6 +70,8 @@ Clusters' usernames are unique strings to be used in URLs so that URLs can be ch
 Using usernames has to be enabled in general Cumulus settings (`using usernames in URLs`). By default Cumulus will use cluster's slug.
 
 ## Developer guide
+
+Before you proceed, ensure you understand the terms explained [before](https://docs.init.biz/cumuluscore/#terms-explanation).
 
 ### Preparing Cumulus pages
 
@@ -97,7 +99,7 @@ then you have to embed all those components (`Session`, `CumulusGuard` and `Feat
 
 ![Feature guard](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/feature-guard.png)
 
-### Preparing Cumulus features
+### Registering Cumulus features
 
 You can register Cumulus features using the `registerCumulusFeatures` method in your `Plugin.php`:
 
@@ -141,7 +143,7 @@ Feature guard is checking if the current cluster can see the page based on featu
 
 **Remember that only one of the checked features is enough to let the user see the page**
 
-> If you want to filter content on one page basing on features, use `canEnterFeature` twig function (see below).
+> If you want to filter content on one page basing on features, use [`canEnterFeature`](https://docs.init.biz/cumuluscore/#canenterfeature-twig-extension).
 
 ![Feature guard](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/feature-guard.png)
 
@@ -209,7 +211,7 @@ Please note that:
 
 ### Registering cluster's features
 
-> **Registering features in system differs from registering cluster's features.** Registering features in the system is described (see).
+> **Registering Cumulus features differs from registering cluster's features.** Registering Cumulus features in the system is described [here](https://docs.init.biz/cumuluscore/#registering-cumulus-features).
 
 Every time a cluster obtains access to a feature (**for the first time, once**) we call it registering cluster's feature. Registering clusters' features is the process of running some 'registering' code when a cluster gets access to a feature whether by changes of the cluster's plan or plan's features.
 
@@ -304,7 +306,7 @@ All repositories:
 
 ### from v.2.0.2 to v.2.0.3
 #### Introducing *Clusters' usernames*
-Clusters' usernames is a new feature of Cumulus, where your users can specify their "username" in URL. See documentation for more info about the feature.
+Clusters' usernames is a new feature of Cumulus, where your users can specify their "username" in URL. Click [here](https://docs.init.biz/cumuluscore/#clusters-usernames) for more info about the feature.
 
 While installing this version Cumulus will by default copy Clusters' slugs to their usernames so by default usernames will be seeded and everything should work out of the box if you enable using usernames.
 
