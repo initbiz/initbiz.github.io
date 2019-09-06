@@ -86,3 +86,9 @@ Let's say that after a half of a year he visits the "manage-subscription" page a
 
 1. if he decides to prolongate, than he will automatically create order for next $150 and his subscription will prolongate typically for the next year,
 1. there is a half of the year left for the current subscription to end. So that if he decides to upgrade his plan to **Pro**, he will have to pay the difference between prices for the period that has left. In this case the difference in prices is $100, so for the half of the year it's $50 still left to pay (see `PriceCalculator` section below).
+
+## Upgrade guide
+
+### v.1 to v.2
+
+The `SubscriptionRepository` was removed. All methods from the repository were moved to `Subscription` model. Refer to the model code for more info.
