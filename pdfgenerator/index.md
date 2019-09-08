@@ -37,13 +37,11 @@ Here you have an example `onDownloadPdf` AJAX handler that generates PDF and dow
      * OctoberCMS AJAX handler to download PDF
      */
     public function onDownloadPdf()
-        $pdfGenerator = new PdfGenerator();
+        // Create a new PdfGenerator object with a filename as a parameter
+        $pdfGenerator = new PdfGenerator("my-pdf");
 
         //Set absolute path of the Twig layout
         $pdfGenerator->layout = plugins_path().'/initbiz/exampleplugin/views/pdf/pdflayout.htm';
-
-        //Set filename for downloaded file
-        $pdfGenerator->filename = "my-pdf";
 
         //Set data which will be sent to the layout
         $pdfGenerator->data = ['viewData' => 'Value of viewData'];
@@ -70,9 +68,8 @@ The plugin comes with a `PdfLayout` class that can be injected to `PdfGenerator`
 
         $layout = new ExampleLayout($data);
 
-        $pdfGenerator = new PdfGenerator($layout);
-
-        $pdfGenerator->filename = "my-pdf";
+        // Create a new PdfGenerator object with a filename and the layout as parameters
+        $pdfGenerator = new PdfGenerator($filename, $layout);
 
         $pdfGenerator->generatePdf();
 

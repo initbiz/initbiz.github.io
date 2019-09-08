@@ -297,6 +297,7 @@ All repositories:
 1. `canEnterFeature($clusterSlug, $featureCode)` -> `$cluster->canEnterFeature($featureCode)`
 1. `getClusterFeatures($clusterSlug)` -> `$cluster->features`
 1. `usernameUnique($username, $clusterSlug)` -> `Helpers::usernameUnique($username, $clusterSlug`
+1. `addClusterToPlan($clusterSlug, $planSlug)` -> `$cluster->plan()->associate($plan)`
 
 `ClusterFeatureLogRepository`:
 
