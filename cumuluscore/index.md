@@ -33,13 +33,13 @@ After that, you are ready to play with a Cumulus based app with example data see
 ## Terms explanation
 
 ### Frontend user / User
-Frontend users are managed by `RainLab.User` plugin. They can log in to your application and in most cases they will be your clients' accounts. See [RainLab.User documentation](https://octobercms.com/plugin/rainlab-user) for more info about this. 
+Frontend users are managed by `RainLab.User` plugin. They can log in to your application and in most cases, they will be your clients' accounts. See [RainLab.User documentation](https://octobercms.com/plugin/rainlab-user) for more info about this. 
 
 By design, your clients' accounts have to have restricted access to the application functionality and data so that they do not see other clients' data (of course if you do not want to).
 
 ### Backend user / Admin
 
-Backend users / admins are developers or application owners. By design backend users have access to application panel and places like: registered users, their subscriptions, invoices, usage stats and so on.
+Backend users / admins are developers or application owners. By design backend users have access to application panel and places like registered users, their subscriptions, invoices, usage stats and so on.
 
 ### Cluster
 
@@ -49,7 +49,7 @@ Clusters are groups of users who share some data between them and can be describ
 
 **Clusters are not `usergroup`s from `RainLab.User` plugin (like `guest`, `registered` and so on)**
 
-Clusters add one more abstraction layer between user roles and permissions in the application. This means you can give a cluster a part of functionality in your system. In Cumulus we use [features](https://docs.init.biz/cumuluscore/#cumulus-features) to do it.
+Clusters add one more abstraction layer between user roles and permissions in the application. This means you can give a cluster a part of the functionality in your system. In Cumulus we use [features](https://docs.init.biz/cumuluscore/#cumulus-features) to do it.
 
 ### Plan
 
@@ -67,7 +67,7 @@ Cumulus Features (or just features) are parts of the whole functionality of our 
 
 Clusters' usernames are unique strings to be used in URLs so that URLs can be changed by the client the way they want to. The same feature on Facebook and Twitter is called `username` so we decided to use the name `username` as well.
 
-Using usernames has to be enabled in general Cumulus settings (`using usernames in URLs`). By default Cumulus will use cluster's slug.
+Using usernames has to be enabled in general Cumulus settings (`using usernames in URLs`). By default, Cumulus will use the cluster's slug.
 
 ## Developer guide
 
@@ -78,16 +78,16 @@ Before you proceed, ensure you understand the terms explained [before](https://d
 In Cumulus we specify four groups of pages that according to content we provide are:
 
 1. publicly visible, where we put our offer, regulations, contact form, login form, register form, etc.,
-1. pages for registered and logged in users, where they can manage their profiles, read messages, select cluster they want to enter etc.,
-1. visible only to users assigned to cluster, like cluster's dashboard, cluster settings etc.,
-1. visible only to clusters that has access to particular features
+1. pages for registered and logged in users, where they can manage their profiles, read messages, select cluster they want to enter, etc.,
+1. visible only to users assigned to cluster, like cluster's dashboard, cluster settings, etc.,
+1. visible only to clusters that have access to particular features
 
 Accordingly, we will create the following pages:
 
 1. public pages such as login page and other public pages,
-1. pages that require the user to be logged in that have `Session` component from `RainLab.User` embedded and configured,
+1. pages that require the user to be logged in that have the `Session` component from `RainLab.User` embedded and configured,
 1. pages that require the user to be assigned to a particular cluster that have the `CumulusGuard` component embedded,
-1. pages that require the current cluster to have access to a particular feature that have the `FeatureGuard` componend embedded and configured.
+1. pages that require the current cluster to have access to a particular feature that have the `FeatureGuard` component embedded and configured.
 
 See the [demo app](https://www.cumulusdemo.init.biz) to get the idea.
 
@@ -121,7 +121,7 @@ If you want to build an application menu for your users, use [Rainlab.Pages](htt
 
 If you select the type then the cluster's username or slug will be automatically injected in the URL.
 
-What is more, you can select features that will be required to show the entry in menu. Remember that only one feature is enough to show the menu (more like logical "or" than "and"). If no feature is selected then everybody will see the menu entry.
+What is more, you can select features that will be required to show the entry in the menu. Remember that only one feature is enough to show the menu (more like logical "or" than "and"). If no feature is selected then everybody will see the menu entry.
 
 ![Static menu in Cumulus](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/menu-static-pages.png)
 
@@ -129,7 +129,7 @@ What is more, you can select features that will be required to show the entry in
 
 #### `UserClustersList`
 
-The component is rendering a view for a user to select the cluster he/she wants to enter. If the user is assigned to only one cluster then the component will transparently redirect browser as it were clicked.
+The component is rendering a view for a user to select the cluster he/she wants to enter. If the user is assigned to only one cluster then the component will transparently redirect browser as it was clicked.
 
 ![Clusters list component](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/user-cluster-list-component.png)
 
@@ -141,11 +141,11 @@ What is more, the component pushes the current `cluster` to the page object and 
 
 #### `FeatureGuard`
 
-Feature guard is checking if the current cluster can see the page based on features it has access to.
+The feature guard is checking if the current cluster can see the page based on features it has access to.
 
 **Remember that only one of the checked features is enough to let the user see the page**
 
-> If you want to filter content on one page basing on features, use [`canEnterFeature Twig function`](https://docs.init.biz/cumuluscore/#canenterfeature-twig-function).
+> If you want to filter content on one page based on features, use [`canEnterFeature Twig function`](https://docs.init.biz/cumuluscore/#canenterfeature-twig-function).
 
 ![Feature guard](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/feature-guard.png)
 
@@ -153,7 +153,7 @@ Feature guard is checking if the current cluster can see the page based on featu
 
 #### Filtering data by cluster
 
-You can easily filter the data returned by the model using `ClusterFiltrable` trait.
+You can easily filter the data returned by the model using the `ClusterFiltrable` trait.
 
 If you have `cluster_id` as a relation column for your model, you can easily filter the data by using `clusterIdFiltered()` method:
 
@@ -169,7 +169,7 @@ You can also customize the attribute and the column by specifying other paramete
 
 #### Cluster unique
 
-If you want to check if a parameter is unique in the cluster scope (for example invoice number that can safely collide with other clusters but cannot be the same for one cluster) then you can use `clusterUnique` method from the trait.
+If you want to check if a parameter is unique in the cluster scope (for example invoice number that can safely collide with other clusters but cannot be the same for one cluster) then you can use the `clusterUnique` method from the trait.
 
 The method returns validation rule for October's validator which you can use in the model's constructor.
 
@@ -187,12 +187,12 @@ If you want to customize the table name or column name to build a unique rule th
 
     $this->rules['invoice_number'] = $this->clusterUnique('invoice_number', 'invoices', 'slug');
 
-You can alternatively use `clusterIdUnique` method if your data is to be filtered by cluster's id.
+You can alternatively use the `clusterIdUnique` method if your data is to be filtered by the cluster's id.
 
 ## Additional features
 
 ### Auto assign
-Auto assigning is a Cumulus function that automatically assigns users and clusters during their registration. Go to `Settings -> Cumulus -> Auto assign` and you will find two tabs: "Auto assign users" and "Auto assign clusters".
+Auto assigning is a Cumulus function that automatically assigns users and clusters during their registration. Go to `Settings -> Cumulus -> Auto-assign` and you will find two tabs: "Auto-assign users" and "Auto-assign clusters".
 
 #### Auto assign users
 ![Auto assign users](https://github.com/initbiz/initbiz.github.io/raw/master/cumuluscore/assets/images/auto-assign-users.png)
@@ -200,7 +200,7 @@ Auto assigning is a Cumulus function that automatically assigns users and cluste
 While auto assigning users to clusters you can decide whether you want to:
 * create a new cluster using variable specified in "variable name (for example "Company name" from variable `companyName`),
 * choose existing cluster for every newly registered user,
-* get cluster slug from variable (for example variable called `companyName`),
+* get cluster slug from the variable (for example variable called `companyName`),
 
 You can also decide whether you want to add a user to a group (`RainLab.UserGroup`) after registering or not.
 
@@ -212,7 +212,7 @@ While auto assigning clusters to plans you can decide if you want to:
 * get the plan from a variable (if you want to send the plan from registration form)
 
 **Remember**:
-* auto assigning clusters will work only if creating a new cluster is enabled in "Auto assign users" tab
+* auto assigning clusters will work only if creating a new cluster is enabled in "Auto-assign users" tab
 * auto assigning clusters to plans from variable will be possible only when you allow that in the plan
 
 ### Registering cluster's features
@@ -233,7 +233,7 @@ The event is blocking so if you decide to stop the process of registration then 
 
 ### Extend clusters' usernames unique rule
 
-If you use usernames feature then you have to ensure that they are unique.
+If you use the usernames feature then you have to ensure that they are unique.
 
 The `Helpers::usernameUnique` method ensures that the username is unique in the cluster's table, but you can extend its logic by using the `initbiz.cumuluscore.usernameUnique` event.
 
@@ -241,7 +241,7 @@ Using the `UpdateCluster` component from [Cumulus plus](https://octobercms.com/p
 
 ### `canEnterFeature()` Twig function
 
-If you want to check in views if current cluster has access to a feature than use `canEnterFeature('feature.code')` Twig function.
+If you want to check in views if the current cluster has access to a feature than use `canEnterFeature('feature.code')` Twig function.
 
 For example:
 
@@ -316,25 +316,25 @@ Clusters' usernames is a new feature of Cumulus, where your users can specify th
 While installing this version Cumulus will by default copy Clusters' slugs to their usernames so by default usernames will be seeded and everything should work out of the box if you enable using usernames.
 
 #### `ClusterSlug` becomes `ClusterUniq`
-`ClusterSlug` property from Cumulus components becomes `ClusterUniq`. That is because it can be either slug or username. It depends on the setting in General settings tab in Backend Settings.
+`ClusterSlug` property from Cumulus components becomes `ClusterUniq`. That is because it can be either a slug or a username. It depends on the setting in the General settings tab in Backend Settings.
 
-The only thing you have to change is `ClusterSlug` to `ClusterUniq` in all places you have been using it directly. Those places are:
+The only thing you have to change is `ClusterSlug` to `ClusterUniq` in all the places you have been using it directly. Those places are:
 * layouts and pages in themes using Cumulus,
-* components that have been using `clusterSlug` param,
+* components that have been using the `clusterSlug` param,
 * external methods that used components' `clusterSlug` param.
 
 As a consequence method `defineClusterSlug` becomes `defineClusterUniq`.
 
-#### `cluster` and `clusterData` variables injected to page by `CumulusGuard` have changed
-`cluster` variable so far has been actually cluster's slug. This was misleading convention that had to be changed. Right now `cluster` is object of current cluster model, while `clusterData` variable is removed.
+#### `cluster` and `clusterData` variables injected to the page by `CumulusGuard` have changed
+the `cluster` variable so far has been actually cluster's slug. This was a misleading convention that had to be changed. Right now `cluster` is the object of the current cluster model, while the `clusterData` variable is removed.
 
 ### from v.1.x.x to v.2.0.0
-It is big. I know. It is funny in technology that after you create something it does not make sense after you work with it for some time. This is what happened to modules and some conventions we used in versions 1.x.x. Sorry about the amount of changes, but we hope our plugin will be much better and usable after the upgrade.
+It is big. I know. It is funny in technology that after you create something it does not make sense after you work with it for some time. This is what happened to modules and some conventions we used in versions 1.x.x. Sorry about the number of changes, but we hope our plugin will be much better and usable after the upgrade.
 
 #### Database changes
 > **Make backup before proceeding.**
 
-In the beginning of Cumulus we did not know some October's and Laravel's conventions. While designing and developing Cumulus we used our own experience and ideas. During this time we get familiar with October's naming suggestions. As a consequence in version 2.0.0 we decided to change a few names.
+At the beginning of Cumulus, we did not know some of October's and Laravel's conventions. While designing and developing Cumulus we used our own experience and ideas. During this time we get familiar with October's naming suggestions. As a consequence in version 2.0.0, we decided to change a few names.
 
 ##### Cluster full_name becomes name
 `Full_name` from `clusters` table becomes name.
@@ -343,37 +343,37 @@ In the beginning of Cumulus we did not know some October's and Laravel's convent
 In version 1.x.x we were using `cluster_id`, `module_id` and `plan_id` as a primary keys. From now all of them will become `id`.
 
 ##### Drop modules
-`initbiz_cumuluscore_modules` and `initbiz_cumuluscore_plan_module` tables will be dropped during upgrade to 2.0.0. Because of that the relation between your plans and modules will be lost. You should create a backup of `initbiz_cumuluscore_plan_modules` and `initbiz_cumuluscore_modules` if you want to review them after upgrade.
+`initbiz_cumuluscore_modules` and `initbiz_cumuluscore_plan_module` tables will be dropped during upgrade to 2.0.0. Because of that, the relation between your plans and modules will be lost. You should create a backup of `initbiz_cumuluscore_plan_modules` and `initbiz_cumuluscore_modules` if you want to review them after the upgrade.
 
-In most cases it should be easy to restore them as modules were whole plugins. Only plans and their relations with modules have to be restored in feature convention.
+In most cases, it should be easy to restore them as modules were whole plugins. Only plans and their relations with modules have to be restored in feature convention.
 
 #### Modules becomes features
-The biggest change in Cumulus v.2 concerns modules. We noticed, that it was not enough for plugin to register only one feature (since modules were actually features of system). This leaded us to plugin registration file, where now plugins can register as many features as they want to (more info in documentation).
+The biggest change in Cumulus v.2 concerns modules. We noticed, that it was not enough for the plugin to register only one feature (since modules were actually features of the system). This led us to the plugin registration file, where now plugins can register as many features as they want to (more info in the documentation).
 
-Methods from `ClusterRepository` that concerns modules will right now use features. It applies to almost every "module" word in methods and attributes names. What is more modules used slugs while features use codes. So every time where we were talking about module slug, right now it is about feature code.
+Methods from `ClusterRepository` that concerns modules will right now use features. It applies to almost every "module" word in methods and attributes names. What is more, modules used slugs while features use codes. So every time where we were talking about module slug, right now it is about feature code.
 
 ##### Modify modules
-Before updating to v.2 **you will have to ensure you register features** as described in documentation for all of your modules.
+Before updating to v.2 **you will have to ensure you register features** as described in the documentation for all of your modules.
 
 What is more, **you have to remove the initial migration** previously created by `create:module` command:
 1. remove file named `register_initbiz_cumulus_module.php`
 1. remove line running it in `version.yaml` file (at the beginning)
 
 ##### `ModuleGuard` becomes `FeatureGuard`
-The responsibility of `ModuleGuard` component was to ensure that plan has access to specified module and return 403 (Forbidden access) if it does not. The responsibility of `FeatureGuard` is the same but it checks if plan has access to any of features specified in component configuration.
+The responsibility of the `ModuleGuard` component was to ensure that the plan has access to the specified module and return 403 (Forbidden access) if it does not. The responsibility of `FeatureGuard` is the same but it checks if plan has access to any of the features specified in component configuration.
 
 **Access to only one feature is enough to enter the page.**
 
 ##### Command `create:module` removed
-As a consequence the command `create:module` is removed. If you want to create something similar then create normal OctoberCMS plugin using `create:plugin` command and by adding `registerCumulusFeatures` method (details in documentation).
+As a consequence the command `create:module` is removed. If you want to create something similar then create a normal OctoberCMS plugin using `create:plugin` command and by adding `registerCumulusFeatures` method (details in documentation).
 
 #### `Settings` model becomes `AutoAssignSettings`
-If you have used `Settings` model somewhere in your code than you will have to change its name to `AutoAssignSettings`.
+If you have used the `Settings` model somewhere in your code then you will have to change its name to `AutoAssignSettings`.
 
-Because of that you will have to reconfigure autoassign in settings or update `initbiz_cumuluscore_settings` row code to `initbiz_cumuluscore_autoassignsettings` in `system_settings` table.
+Because of that, you will have to reconfigure auto-assign in settings or update `initbiz_cumuluscore_settings` row code to `initbiz_cumuluscore_autoassignsettings` in `system_settings` table.
 
 #### `Menu` and `MenuItem` components removed
-From version 2.0.0 we decided to use [RainLab.Pages](https://octobercms.com/plugin/rainlab-pages) to build menus. It is powerful, supported and extendable way to build menus.
+From version 2.0.0 we decided to use [RainLab.Pages](https://octobercms.com/plugin/rainlab-pages) to build menus. It is a powerful, supported and extendable way to build menus.
 
 #### Cumulus Plus users
-If you are using Cumulus Plus extension make sure you change permissions from module name to feature code in "permissions".
+If you are using the Cumulus Plus extension make sure you change permissions from module name to feature code in "permissions".
