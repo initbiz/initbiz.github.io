@@ -93,4 +93,5 @@ To override the views of settings and dashboard components you have to use the p
 This way if you embed `ClusterDashboard` component on the page and `WelcomeMessage` component as a child then you have to create `clusterdashboardwelcomemessage` directory in your `partials` directory, since this will be the alias of the plugin.
 
 ## TODO / Feature plans
+* Cumulus settings model that stores Cumulus settings in one place
 * Drag & Drop dashboard
