@@ -5,13 +5,11 @@
 
 This plugin extends the functionality of [Cumulus Core plugin](https://octobercms.com/plugin/initbiz-cumuluscore).
 
-Using this plugin you can send announcements (and e-mails) to users in your Cumulus Core based application.
+Using this plugin you can send announcements (notifications) and e-mails to users in your Cumulus Core based application.
 
-Announcements are notifications for users, so it is a great way to inform our users about:
-* New features in our system,
-* Sales in the application,
-* New regulations (ave GDPR :) ),
-* Just new messages to our users, based on their clusters and plans as well :)
+[//]: # (Documentation)
+
+## Announcements
 
 You can specify if you want to send the announcement to:
 1. all users,
@@ -19,30 +17,29 @@ You can specify if you want to send the announcement to:
 1. only to those in selected clusters
 1. only to those in selected plans
 
-This way the announcement will be displayed only to users that are in the group you specified.
+You can specify if you want to send a email or publish the announcement. You can send e-mail, publish them in system or both.
 
-[//]: # (Documentation)
+> Remember that sent e-mails cannot be unsent. If you have sent e-mails and want to update the announcement then remember that if you do not uncheck the `Send e-mail` switch, the e-mail will be sent again.
 
-In the `UserAnnouncements` component, all of the user's announcements (personal, his or her cluster's, his or her clusters' plans) will be displayed. See screenshots for better understanding.
+### Note for developers
 
-You can also send e-mail to every one of those groups. You do not have to publish announcements in their frontend space. Of course, it is possible to both send an e-mail and publish the announcement in their frontend.
+From the developer point of view announcements are always dedicated for a group of users and with those users the relation in DB will be stored. Remember though that this is not `users()` relation to get users that the announcement was dedicated for. In DB we are storing relations with users, clusters and plans to properly render the views in backend and to keep it clean. While saving the announcement `users_to_announce()` relation will be filled with the users and the information if they have marked the announcement as read or deleted.
 
-> Remember to uncheck the `Send e-mail` switch while updating the announcement if you do not want to send another email to users.
+## Announcers
 
-The plugin is fully translatable, right now there are only English and Polish translations available.
+Announcers are rules that define automatic announcements. Plugins register their own announcer types, for example Cumulus Core registers `New user registers` announcer type, while Cumulus Subscriptions registers `Subscription expires` announcer.
 
-User will be notified in his or her frontend after login to your system.
+More Announcer types will be added on request or our demand, do not hesitate to ask for more.
 
-## Components
-There is a component named `UnreadAnnouncements` that injects all of the unread announcements for the user with Bootstrap modal styling and small bell icon which shows the number of unread messages.
+## Upgrade v.1 -> v.2
 
-The second component renders a list of all `UserAnnouncements`.
+The `announcementRepository` was removed. The methods from there were mostly moved to the `Announcement` model:
 
-The third component `AnnouncementDetails` is meant to be embedded on a page that shows one announcement. If the user visits the page with this component, the message is **automatically** marked as read by him or her. He or she can also delete the message here.
+* `getPublished` -> `Announcement::published()->get()`
+* `getAllUsersUnreadAnnouncements` -> `Announcement::unreadByUser($user)->get()`
+* `markAnnouncementRead` -> `$announcement->markAsReadBy($user)`
+* `markAnnouncementDeleted` -> `$announcement->markAsDeletedBy($user)`
 
-Being unread, read or deleted is state - relation between announcement and user. So deleting the announcement by the user does not actually delete the message. It just hides the message for the user.
+There were also added a few very handy methods to the model so check it out to find more cool stuff.
 
-## Future plans
-1. Add automatic announcements (on events?)
-1. Mark the "as read" button working AJAXly
-1. Integrate with push notifications
+The `announcementManager` trait was removed.
