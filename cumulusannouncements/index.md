@@ -43,3 +43,5 @@ The `announcementRepository` was removed. The methods from there were mostly mov
 There were also added a few very handy methods to the model so check it out to find more cool stuff.
 
 The `announcementManager` trait was removed.
+
+The `UnreadAnnouncements` component was removed. Right now `UserAnnouncements` injects unread announcements as well.
