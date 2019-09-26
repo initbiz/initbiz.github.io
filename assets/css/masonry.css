@@ -1,0 +1,10 @@
+.grid .card{
+    margin-bottom: 10px;
+    margin-right: 2%; 
+    width: 100%; 
+}
+@media screen and (min-width: 719px) {
+    .grid .card { 
+        width: 31.333%;
+    }
+}
