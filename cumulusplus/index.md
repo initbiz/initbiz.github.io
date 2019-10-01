@@ -49,7 +49,7 @@ The grid in the dashboard is 12-columns, so in this example, the box will be ful
 
 If you want to manipulate other components parameters before passing them to the views you can use `initbiz.cumulusplus.beforeDashboardRender` event. It passes the definitions of all the components by reference.
 
-> `ClusterDashboard` component uses [grid-stack](https://github.com/gridstack/gridstack.js) and [lodash](https://lodash.com/). As a consequence, you have to have [jQuery](https://jquery.com/) included in your project. What is more, by default it uses [Bootstrap 3](https://getbootstrap.com/) syntax, so if you want to use the default views files you have to have Bootstrap 3 included as well.
+> `ClusterDashboard` component uses [grid-stack](https://github.com/gridstack/gridstack.js). As a consequence, you have to have [jQuery](https://jquery.com/) included in your project. What is more, by default it uses [Bootstrap 3](https://getbootstrap.com/) syntax, so if you want to use the default views files you have to have Bootstrap 3 included as well.
 
 ## Settings component
 
