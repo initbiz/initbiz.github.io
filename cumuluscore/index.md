@@ -249,6 +249,8 @@ For example:
         Something visible only to those who have access to initbiz.cumulusdemo.paid_feature.
     {% endif %}
 
+You can also use `canEnterAnyFeature` if you want to check if the cluster has access to any of the supplied features in the array. What is more, the method accepts feature codes that end with the `*`.
+
 ## Contributions / Issues
 
 If you want to get in touch, write to [contact@init.biz](mailto:contact@init.biz) or directly to @tomaszstrojny on OctoberCMS's official Slack.
