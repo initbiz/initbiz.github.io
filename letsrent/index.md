@@ -18,9 +18,20 @@ If you are about to run a car rental you should definitely look at the extension
 [//]: # (Documentation)
 
 ## Orders
-
-### Backend and frontend
 Orders can be created using `CreateOrder` component as well as backend controller but there are little differences between those two. While creating order using component, dates are strictly validated. When you create an order in the backend, dates has to be set wisely. Rentables will still be filtered by availability but dates can be set even in the past. It's just for the convenience of the employees of the rental.
+
+### Price
+First of all, in every rental there have to defined such constants:
+1. minimum period for the rental (whether is 15 minutes, 1 hour, 1 day and so on),
+1. buffer for all rentals.
+
+> For example, when we have car rental, we would like to have minimum period of one day and for example 2 hours of buffer between rentals to prepare cars.
+
+Every price of the rentable models define price for the defined period.
+
+> In the car rental example where our minimal rental period is one day, in the rental models we give prices for one day.
+
+To calculate the price for the rentable model, by default the `Order` model is running `getPriceCalculatedFor` method which is defined in the `Rentable` behavior. The method by default is multipling the given price by the count of periods. If you want to give custom logic for the model, you can override the method in the rentable model.
 
 ### Status and payment status
 Payment statuses are:
@@ -30,9 +41,19 @@ Payment statuses are:
 
 Statuses are:
 1. `draft`,
-1.
+1. `ordered`,
+1. `in_progress`,
+1. `cancelled`,
+1. `closed`
 
 All of them are defined in the `Order` model and are translated to display nicely for clients.
+
+### Additional charges
+All additional charges for the order can be added using `setAdditionalCharge` method. By default there are for in use:
+1. Pickup location extra paid,
+1. Return location extra paid,
+1. Pickup hour extra paid,
+1. Return hour extra paid.
 
 ## Rentables
 
