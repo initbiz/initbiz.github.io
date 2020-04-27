@@ -14,6 +14,13 @@ Let's rent plugin is a plugin for running rental office in OctoberCMS. It is jus
 1. fully translatable interface integrated with [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate),
 1. easy to extend, Octoberish design and API.
 
+## Third party dependencies
+By default the plugin uses amazing:
+
+1. [SweetAlert 2](https://sweetalert2.github.io/),
+1. [Flatpickr](https://flatpickr.js.org/),
+1. [Select2](https://select2.org/).
+
 [//]: # (Documentation)
 
 ## Orders
@@ -60,7 +67,12 @@ All additional charges for the order can be added using `setAdditionalCharge` me
 It is recommended to use `markAsPaid` method from the `Order` model. The method will save current date as `paid_at` and fire event `initbiz.letsrent.markAsPaid` with the order as a parameter.
 
 ## Rentables
-Rentables are models that can be rent using Let's rent plugin. They have to be registered in the plugin's registration file using `registerRentables` method.
+Rentables are models that can be rent using Let's rent plugin. By design all rentable models will be attached to the order using dynamic polymorphic many to many relation and be rendered as a tab in the `Orders` controller.
+
+The availability of the models for the given spans of time will be automatically filtered using `Rentable` behavior.
+
+## Registering rentables
+They have to be registered in the plugin's registration file using `registerRentables` method.
 
 For example:
 
@@ -100,6 +112,30 @@ As a consequence, the model has to have `currency_id` and `amount` columns in th
 1. amount - unsigned integer nullable
 1. currency_id - unsigned integer nullable
 
+### Rentable model filters
+If you want to give the list of rentables ability to filter the records, you can define `rentableFilters` property of the model. For example:
+
+    public $rentableFilters = [
+        'brand' => [
+            'label' => 'initbiz.letsrentcars::lang.car.filter.brand'
+        ],
+    ];
+
+Using the codes from the variable, `RentableList` component will look for the attribute in the query string (GET) and enable them in scope if the value is proper.
+
+For every filter you should also define method get options method like so:
+
+    public function getBrandOptions()
+    {
+        return [
+            'renault' => 'Renault',
+            'audi'    => 'Audi',
+            'bmw'     => 'BMW',
+        ];
+    }
+
+This way you will be ready for the backend dropdowns and for the filters list to be built.
+
 ### `Rentable` behavior
 Implementing the behavior will automatically define dynamic 'price' attribute for columns `amount` and `currency_id`.
 
@@ -112,8 +148,6 @@ Ensure you have boolean `is_enabled` column in the model's database table.
 
 This will make it possible to use `enabled()` scope on the model and automatically make disabled models invisible for queries.
 
-
-
 ## Categories
 Categories are meant to be used by the plugins extending Let's rent.
 
@@ -122,6 +156,45 @@ Categories are meant to be used by the plugins extending Let's rent.
 They are created just for convenience of the rental office employees.
 
 ## Components
+### `RentableList`
+This component will render a list of rentables. The only thing you have to do is to select the rentable model from the list in component's inspector.
+
+By default the list will have links with URLs to the page with `RentableDetails` to show the particular rentable.
+
+> **Using the car rental example, using this component you can render a list of cars**
+
+The component will automatically embed the `OrderInfo` component and make use of it to automatically filter the list using the query string parameters.
+
+The component also supports AJAXly updated list of filtered elements.
+
+### `RentableDetails`
+This component will inject the particular rentable object in the page.
+
+> **Using the car rental example, using this component you can render details of the selected cars**
+
+### `RentForm`
+The component will render a typical rental form with such parameters:
+1. Start time,
+1. End time,
+1. Start location,
+1. End location.
+
+Locations will be seeded from the settings and if they are extra paid, than the option will have this specified in the parenthesis.
+
+Start and end time will be set to the closest possible time by default and it will be treated as the minimum date in the frontend. If the page remember the state of the inputs and the date is to early, the alert will be returned:
+
+![Start date alert](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/start-date-alert.png)
+
+### `CreateOrder`
+The component
+
+### `OrderInfo`
+If the parameters of the `startlocation`, `endlocation`, `starttime` and `endtime` are specified in the
+The list will be automatically filtered by the parameters in the query string (GET).
+
+### `OrderList`
+
+### `OrderSummary`
 
 ## Settings
 ### Working hours
