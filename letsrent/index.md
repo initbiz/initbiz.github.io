@@ -1,9 +1,8 @@
-# Let's Rent - Rental software for OctoberCMS
+# Let's Rent - Run your rental office using OctoberCMS
 ![Let's rent banner](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/letsrent-banner.png)
 
 ## Introduction
-
-If you are about to run a car rental you should definitely look at the extension for this plugin: [Initbiz.LetsRentCars](https://octobercms.com/plugin/initbiz-letsrentcars).
+Let's rent plugin is a plugin for running rental office in OctoberCMS. It is just an abstraction to be extended by another plugin which will provide concrete models to be rented. If you want to run a car rental you should definitely look at the extension for this plugin: [Initbiz.LetsRentCars](https://octobercms.com/plugin/initbiz-letsrentcars).
 
 ## Features
 1. check availability for the rentable models,
@@ -20,10 +19,12 @@ If you are about to run a car rental you should definitely look at the extension
 ## Orders
 Orders can be created using `CreateOrder` component as well as backend controller but there are little differences between those two. While creating order using component, dates are strictly validated. When you create an order in the backend, dates has to be set wisely. Rentables will still be filtered by availability but dates can be set even in the past. It's just for the convenience of the employees of the rental.
 
-### Price
-First of all, in every rental there have to defined such constants:
-1. minimum period for the rental (whether is 15 minutes, 1 hour, 1 day and so on),
+### Order price
+In every rental office there have to defined such constants:
+1. minimum period for the rental (whether it is 15 minutes, 1 hour, 1 day and so on),
 1. buffer for all rentals.
+
+![Time spans settings](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/settings-time-spans.png)
 
 > For example, when we have car rental, we would like to have minimum period of one day and for example 2 hours of buffer between rentals to prepare cars.
 
@@ -55,9 +56,13 @@ All additional charges for the order can be added using `setAdditionalCharge` me
 1. Pickup hour extra paid,
 1. Return hour extra paid.
 
-## Rentables
+### Marking an order as paid
+It is recommended to use `markAsPaid` method from the `Order` model. The method will save current date as `paid_at` and fire event `initbiz.letsrent.markAsPaid` with the order as a parameter.
 
-Rentables are models that can be rent using Let's rent plugin. They have to be registered in the plugin's registration file like so:
+## Rentables
+Rentables are models that can be rent using Let's rent plugin. They have to be registered in the plugin's registration file using `registerRentables` method.
+
+For example:
 
     public function registerRentables()
     {
@@ -81,6 +86,8 @@ Rentables are models that can be rent using Let's rent plugin. They have to be r
         ];
     }
 
+> By default relation's config does not have to be specified, it will get default of the `columns.yaml` and `fields.yaml`.
+
 In this example there is a `Car` model in the `Let's Rent Cars` plugin that can be rented using the plugin.
 
 Registering the model as a rentable will make a few things:
@@ -94,19 +101,69 @@ As a consequence, the model has to have `currency_id` and `amount` columns in th
 1. currency_id - unsigned integer nullable
 
 ### `Rentable` behavior
+Implementing the behavior will automatically define dynamic 'price' attribute for columns `amount` and `currency_id`.
 
-it will automatically make your model implement moneyfields and define dynamic 'price' attribute for columns amount and currency_id
+### Disabled models
+Rentable models can support disabling feature.
 
-required amount and currency_id and cannot have price - this will be a combination of those two
+    public $supportDisabling = true;
 
-use supportDisabling
+Ensure you have boolean `is_enabled` column in the model's database table.
 
-add is_enabled column
+This will make it possible to use `enabled()` scope on the model and automatically make disabled models invisible for queries.
 
-Add custom addresses and prices for them. Store it in `additional_charges`. Extend the logic with custom km price with mapquest.
+
+
+## Categories
+Categories are meant to be used by the plugins extending Let's rent.
+
+![Category list](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/category-list.png)
+
+They are created just for convenience of the rental office employees.
 
 ## Components
 
 ## Settings
 ### Working hours
 You can specify working hours for every week day.
+
+![Working hours](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/settings-working-hours.png)
+
+What is more, you can forbid rentals in non working hours or if you like enable but add specified amount of money to the order automatically.
+
+### Locations
+You can manage pick up locations from the settings and specify amount of money to be added to the order on select the location.
+
+> **Remember to keep the same code for multiple languages**
+
+Paid locations will render the amount in the rent form and backend controller options.
+
+![Locations](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/settings-locations.png)
+
+## Time spans
+The settings are meant to be set before making the app production ready. They refer to the order price described in the beginning of the document.
+
+![Time spans settings](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/settings-time-spans.png)
+
+### Buffer before creating order
+The setting describe the time that has to lapse from the time of creating the order for the rentable models to be ready.
+
+For example if someone wants to create order on Monday at 8:00 a.m. for 8 hours buffer he/she will be able to do that at 4 p.m.
+
+You can override the default behavior using the `initbiz.letsrent.orderAfterDateNormalization` event.
+
+The following code will make it possible to rent something at the beginning of the next working day:
+
+    Event::listen('initbiz.letsrent.orderAfterDateNormalization', function ($order) {
+        $startsAtNormalized = Session::get('initbiz.letsrent.starts_at_normalized');
+        $endsAtNormalized = Session::get('initbiz.letsrent.ends_at_normalized');
+
+        if ($startsAtNormalized || $endsAtNormalized) {
+            $settings = Settings::instance();
+            $closestWorkingDay = $settings->getClosestWorkingDay();
+            $hours = $settings->getWorkingHours($closestWorkingDay->dayOfWeek);
+            $closestOpening = Carbon::parse($closestWorkingDay->format('Y-m-d') . $hours['from']);
+            $order->starts_at = $closestOpening;
+            $order->ends_at = $closestOpening->modify('+' . $settings->get('count') . ' ' . $settings->get('period'));
+        }
+    });
