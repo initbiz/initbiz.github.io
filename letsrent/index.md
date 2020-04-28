@@ -21,6 +21,8 @@ By default the plugin uses amazing:
 1. [Flatpickr](https://flatpickr.js.org/),
 1. [Select2](https://select2.org/).
 
+Take a look at the [Initbiz.LetsRentCars](https://octobercms.com/plugin/initbiz-letsrentcars) plugin for example extension of this plugin.
+
 [//]: # (Documentation)
 
 ## Orders
@@ -165,7 +167,7 @@ By default, the list will have links with URLs to the page with `RentableDetails
 
 The component will automatically embed the `OrderInfo` component and make use of it to automatically filter the list using the query string parameters.
 
-The component also supports the AJAXly updated list of filtered elements.
+The component also supports the AJAXly updated list of filtered elements. It will send AJAX request to `onRefreshList` handler which returns the filtered list of rentables and updates the partial to `div#rentables-list`. What is more, it will automatically set the filters in the query string as well as can load default filters from the query string.
 
 ### `RentableDetails`
 This component will inject the particular rentable object on the page.
@@ -194,6 +196,8 @@ Using this component you users can create orders. It is getting the order parame
 1. `endtime`,
 1. `startlocation`,
 1. `endlocation`,
+
+The scripts loaded by the plugin add feature to automatically send AJAX requests (to `onOrderChange`) on change for inputs with two classes: `refreshing-field` and `refreshing-field-blur`. They both send every field in `Order[]` namespace to the handler but the first one will send on every change, while the second one only when user leaves the field.
 
 ### `OrderInfo`
 The component in most cases is used by other components to prepare the order using the query string parameters.
