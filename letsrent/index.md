@@ -186,15 +186,44 @@ Start and end time will be set to the closest possible time by default and it wi
 ![Start date alert](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/letsrent/assets/images/start-date-alert.png)
 
 ### `CreateOrder`
-The component
+Using this component you users can create orders. It is getting the order parameters from the query string to initally prepare order:
+
+1. `rentable` - code of the rentable being ordered,
+1. `slugs` - slugs of the rentables in the format `slug-1,slug-2`,
+1. `starttime`,
+1. `endtime`,
+1. `startlocation`,
+1. `endlocation`,
 
 ### `OrderInfo`
-If the parameters of the `startlocation`, `endlocation`, `starttime` and `endtime` are specified in the
-The list will be automatically filtered by the parameters in the query string (GET).
+The component in most cases is used by other components to prepare the order using the query string parameters.
+
+By default it is rendering booking information of the current order, hidden inputs that keep the parameters and displays button if no order is specified.
 
 ### `OrderList`
+When user creates order, its ID is kept in a cookie. The list of user's orders can be rendered using this component.
+
+The component can be rendered in a few modes:
+
+* modal
+* dropdown
+* select input
+* list
+* button
+
+Button mode is designed to be only a link to page that shows list of orders. In this case you should embed the component with a different mode on that page.
 
 ### `OrderSummary`
+The component renders details of the order from URL parameter. `onRun` it checks if the user has access to display the order and aborts if not.
+
+The component gives two AJAX handlers:
+
+1. `onTransfer`
+1. `onCashOnDelivery`
+
+The `onTransfer` handler gets `orderId` from `POST` and redirects to `paymentPage` property with order ID in parameter. It is designed to process payments whatever way you want.
+
+The `onCashOnDelivery` handler ensures is user can modify the order and if so, sets `payment_status` to `cash_on_delivery`. It is meant to be used by the client who want to inform rental office that he/she wants to pay on delivery.
 
 ## Settings
 ### Working hours
@@ -240,3 +269,6 @@ The following code will make it possible to rent something at the beginning of t
             $order->ends_at = $closestOpening->modify('+' . $settings->get('count') . ' ' . $settings->get('period'));
         }
     });
+
+## TODO / Future features
+1. User registration out of the box
