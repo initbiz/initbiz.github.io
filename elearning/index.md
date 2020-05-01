@@ -35,13 +35,20 @@ Duration and difficulty are optional parameters that can be used in views to bet
 Courses can be reordered using simple reorder behavior.
 
 ## Lesson
-Lessons are designed to keep the video path from the `mediafinder`.
-
 ![Update lesson](https://raw.githubusercontent.com/initbiz/initbiz.github.io/master/elearning/assets/images/screenshot1.png)
 
-Every lesson can have `number_in_course` parameter set. By default, it is set to the last position of the course after selecting the course. If you decide to make it earlier one add the number
+Every lesson can have a `number_in_course` parameter set. By default, it is set to the last position of the course after selecting the course. If you decide to make it earlier one add the number
 
 > **Right now lessons have to have incremented numbers for the `number_in_course`. `next_lesson` and `previous_lesson` will not work if the numbers are not one after the other**
+
+### Materials
+Lessons can keep a variety of material types.
+
+1. Video from media (which can be protected as described below),
+1. Slideshow created from PDF attachment,
+1. Slideshow created from uploaded images,
+1. Embedded video (like videos from YouTube or Vimeo),
+1. Other attachments
 
 ## Related courses and lessons
 Lessons can have related lessons and courses can have related courses. The idea here is to link lessons and courses logically, not only by the order in the course.
