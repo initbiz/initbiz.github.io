@@ -37,6 +37,7 @@ Here you have an example `onDownloadPdf` AJAX handler that generates PDF and dow
      * OctoberCMS AJAX handler to download PDF
      */
     public function onDownloadPdf()
+    {
         // Create a new PdfGenerator object with a filename as a parameter
         $pdfGenerator = new PdfGenerator("my-pdf");
 
@@ -63,6 +64,7 @@ The plugin comes with a `PdfLayout` class that can be injected to `PdfGenerator`
      * OctoberCMS AJAX handler to download PDF
      */
     public function onDownloadPdf()
+    {
         //Set data which will be injected to the layout
         $data = ['viewData' => 'Value of viewData'];
 
